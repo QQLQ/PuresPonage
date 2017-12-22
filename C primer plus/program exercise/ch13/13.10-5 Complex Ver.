@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<ctype.h>
+int main(int argc,char *argv[])
+{
+    char ch,tch;
+    int count=0;
+    FILE *fp;
+    long i,cur;
+    i=0;
+    int printed=0;
+   if  (argc!=3)
+      {fprintf(stderr,"Usage:%s [Character] [Filename]",argv[0]);
+       exit(EXIT_FAILURE);}
+   if (argv[1][1]!='\0'|| !(isgraph(argv[1][0])) )
+      {puts("The first command-line argument must be a character!");
+       exit(EXIT_FAILURE);}
+   if ( !(fp=fopen(argv[2],"r")) )
+      {fprintf(stderr,"Can not open \"%s\"\n",argv[2]);
+       exit(EXIT_FAILURE);}
+    
+   tch=argv[1][0];
+
+    while ( (ch=getc(fp))!=EOF)
+       {
+         i++;
+           if (ch=='\n')
+             {i=0;
+              printed=0;}
+            if (ch==tch&&printed==0)
+               { cur=ftell(fp);
+                 if (fseek(fp,-i,SEEK_CUR))
+                    {fprintf(stderr,"Error in setting positon.(0)\n");
+                     exit(EXIT_FAILURE);}
+                 printed=1;
+                 while ( (ch=getc(fp))!=EOF&&ch!='\n' )
+                     putchar(ch);                 
+                 putchar('\n');
+                 if (feof(fp))
+                     break;
+                 if (fseek(fp,cur,SEEK_SET))
+                    {fprintf(stderr,"Error in setting positon.(1)\n");
+                     exit(EXIT_FAILURE);}
+                 count++;                 
+                  }   
+        }
+fclose(fp);
+if (count>0)
+  printf("%d line%swith %c have been printed.\n",count,count>1?"s ":" ",argv[1][0]);
+else
+  printf("There is no line with %c.\n",argv[1][0]);  
+
+puts("DONE!");
+
+return 0;
+}
+    
+            

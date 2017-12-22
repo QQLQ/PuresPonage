@@ -1,0 +1,61 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<ctype.h>
+#define BUF 4096
+#define SIZE 40
+
+char* sgets(char*,int);
+int main(void)
+{
+    FILE *fps,*fpt;
+    char fname_src[SIZE];
+    char fname_tar[SIZE];
+    int ch;
+    long pos,count;
+    count=0;
+puts("Please enter source file name.");
+    if (sgets(fname_src,SIZE)==NULL)
+    {fprintf(stderr,"Invalid input.\n");
+     exit(EXIT_FAILURE);}
+
+    if ( (fps=fopen(fname_src,"r"))==NULL )
+    {fprintf(stderr,"Unable to open file %s\n",fname_src);
+     exit(EXIT_FAILURE);}
+
+puts("Please enter target file name.");
+    if (sgets(fname_tar,SIZE)==NULL)
+    {fprintf(stderr,"Invalid input.\n");
+     exit(EXIT_FAILURE);}
+
+    if ( (fpt=fopen(fname_tar,"w"))==NULL )
+    {fprintf(stderr,"Unable to open file %s\n",fname_tar);
+     exit(EXIT_FAILURE);}
+
+    while ( (ch=getc(fps))!=EOF)
+        putc(toupper(ch),fpt);
+
+                          
+
+puts("DONE!");
+return 0;
+}
+
+
+char* sgets(char*ar,int size)
+{    int i=0;
+     char*p;
+    p=fgets(ar,size,stdin);
+    if (p) 
+     {
+      while (ar[i])
+        {   if (ar[i]=='\n')
+            {ar[i]='\0';
+             return p;}
+          i++;
+         }
+      while (getchar()!='\n');
+     }
+return p;
+}  
+
+//GOD,didn't expect that's what the exercise really asked.This is much more simple than i thought.

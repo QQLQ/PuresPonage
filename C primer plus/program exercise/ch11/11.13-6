@@ -1,0 +1,63 @@
+#include<stdio.h>
+#define SIZE 40
+int is_within(char,char*);
+char* s_gets(char*,int);
+
+int main(void)
+{   char ch;
+    char ar[SIZE];
+    int i;
+     
+
+puts("Enter your strings(Enter nothing to quit):");
+
+while (s_gets(ar,SIZE))
+  {
+     if (ar[0]=='\0')
+      break;
+
+       puts("Enter your ch:");
+  
+       ch=getchar();
+     
+       i=is_within(ch,ar);
+       
+       while (getchar()!='\n');
+       
+       printf("%c is%sin for sure.\n",ch,i?" ":" not ");
+       
+       puts("Enter your strings(Enter nothing to quit):"); 
+  }
+puts("Bye!");
+return 0;  
+}
+
+int is_within(char ch,char*ar)
+{
+  int i=0;
+  while (ar[i]!='\0')
+  { 
+    if (ar[i]==ch)
+       return 1;
+    i++;
+   }
+  return 0;
+}
+
+char* s_gets(char*ar,int size)
+{
+    char *p,*pt;
+    pt=fgets(ar,size,stdin);
+    p=ar;
+    if (pt)
+    {
+       while (*p!='\n'&&*p!='\0') 
+           p++;
+       if (*p='\n')
+           *p='\0';
+       else 
+          while (getchar()!='\n');
+    }
+return pt;
+}
+ 

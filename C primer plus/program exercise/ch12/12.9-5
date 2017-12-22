@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#define SIZE 100
+
+static void arra_int(int *,int);
+
+int main(void)
+{   int ar[SIZE];
+    int i;
+
+    srand((unsigned int)time(NULL));
+
+    for (i=0;i<SIZE;i++)
+      ar[i]=rand()%10+1;
+
+     arra_int(ar,SIZE);
+
+    for (i=0;i<SIZE;i++)
+      {printf("ar[%2d]=%2d ",i,ar[i]);
+       if ( (i+1)%5==0 )
+         putchar('\n');
+       }
+
+if ((i+1)%5!=0)
+    putchar('\n');
+
+return 0;
+}
+
+void arra_int(int *ar,int size)
+{   int i,n,temp;
+
+   for (i=0;i<size;i++)
+    for (n=i+1;n<size;n++)
+       if (ar[i]<ar[n])
+         {temp=ar[i];
+          ar[i]=ar[n];
+          ar[n]=temp;}
+return;
+}

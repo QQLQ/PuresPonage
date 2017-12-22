@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<ctype.h>
+#define BUF 254
+int main(int argc,char *argv[])
+{
+    char ch,tch;
+    FILE *fp;
+    char *pt;
+    char line[BUF];
+    int count=0;    
+   if  (argc!=3)
+      {fprintf(stderr,"Usage:%s [Character] [Filename]",argv[0]);
+       exit(EXIT_FAILURE);}
+   if (argv[1][1]!='\0'|| !(isgraph(argv[1][0])) )
+      {puts("The first command-line argument must be a character!");
+       exit(EXIT_FAILURE);}
+   if ( !(fp=fopen(argv[2],"r")) )
+      {fprintf(stderr,"Can not open \"%s\"\n",argv[2]);
+       exit(EXIT_FAILURE);}
+ 
+    ch=argv[1][0];    
+
+   while (fgets(line,BUF,fp))
+     {  pt=line; 
+         while (*pt)
+            {
+              if (*pt==ch)
+                 {fputs(line,stdout);
+                  count++; 
+                  break;}
+               pt++;
+             }
+     }
+
+fclose(fp);
+if (count>0)
+  printf("%d line%swith %c have been printed.\n",count,count>1?"s ":" ",argv[1][0]);
+else
+  printf("There is no line with %c.\n",argv[1][0]);  
+
+return 0;
+}

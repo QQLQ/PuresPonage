@@ -1,0 +1,114 @@
+//Usage:./a.out [image file]
+#include<stdio.h>
+#include<stdlib.h>
+#include<ctype.h>
+#define LINES 20
+#define COLS 31
+void Print(int (*)[*],int,int);
+void Storage(int (*pic)[COLS],int lines,int cols,FILE *fp);
+int main(int argc,char *argv[])
+{
+    FILE *fp,*fpt;
+    int pic[LINES][COLS];
+    int x,y;
+    int ch;
+    x=y=0;
+
+   if (argc!=3)
+      {fprintf(stderr,"Usage:%s [image file] [data file]\n",argv[0]);
+       exit(EXIT_FAILURE);}
+
+   if ( !(fp=fopen(argv[1],"r")) )
+      {fprintf(stderr,"Unable to open file %s",argv[1]);
+       exit(EXIT_FAILURE);}
+   if ( !(fpt=fopen(argv[2],"w")) )
+      {fprintf(stderr,"Unable to open file %s",argv[2]);
+       exit(EXIT_FAILURE);}
+
+   for (x=0;x<20;x++)
+       pic[x][30]=-1;         // "-1" for '\n'. 
+   x=0;                       //Dont forget this.
+
+  while ((ch=getc(fp))!=EOF)
+      if (isdigit(ch))
+        {    
+          if (y<COLS-1)
+             {pic[x][y]=ch;
+              y++;}
+          else
+             {
+              y=0;
+              x++;
+              if (x>=LINES)
+               {fprintf(stderr,"Overlimit.\n");
+                exit(EXIT_FAILURE);}
+              pic[x][y]=ch;
+              y++;
+             }
+          }
+
+printf("1 2 3 4 5 6 7 8 9 # 1 2 3 4 5 6 7 8 9 # 1 2 3 4 5 6 7 8 9 0\n");    
+Print(pic,LINES,COLS);
+Storage(pic,LINES,COLS,fpt);
+fclose(fpt);
+fclose(fp);
+ //There is no '7'.So i just put a character.
+ //I can't tolerate scuh a number just got lost. 
+puts("DONE!");
+
+return 0;
+}
+
+void Print(int (*pic)[31],int lines,int cols)
+{ int x,y;
+  x=y=0;
+  for (x=0;x<lines;x++)
+       for (y=0;y<cols;y++)
+          {
+            switch (pic[x][y])
+              {
+               case '1':putchar('.');break;
+               case '2':putchar('\'');break;
+               case '3':putchar(':');break;
+               case '4':putchar('~');break;
+               case '5':putchar('*');break;
+               case '6':putchar('=');break;
+               case '7':putchar('@');break;   
+               case '8':putchar('%');break;     
+               case '9':putchar('#');break;
+               case '0':putchar(' ');break;
+               case -1:putchar('\n');break;
+               default: ;break;
+              }
+            if (pic[x][y]!=-1)
+             putchar(' ');
+            }
+return;
+}
+
+void Storage(int (*pic)[COLS],int lines,int cols,FILE *fp)
+{ int x,y;
+  x=y=0;
+  for (x=0;x<lines;x++)
+       for (y=0;y<cols;y++)
+          {
+            switch (pic[x][y])
+              {
+               case '1':putc('.',fp);break;
+               case '2':putc('\'',fp);break;
+               case '3':putc(':',fp);break;
+               case '4':putc('~',fp);break;
+               case '5':putc('*',fp);break;
+               case '6':putc('=',fp);break;
+               case '7':putc('@',fp);break;   
+               case '8':putc('%',fp);break;     
+               case '9':putc('#',fp);break;
+               case '0':putc(' ',fp);break;
+               case -1:putc('\n',fp);break;
+               default: ;break;
+              }
+            if (pic[x][y]!=-1)
+             putc(' ',fp);
+            }
+return;
+}

@@ -1,0 +1,49 @@
+#include<stdio.h>
+#include<ctype.h>
+#define SIZE 40
+char* s_gets(char*,int);
+int ATOI(char*);
+
+int main(void)
+{  char ar[SIZE];
+   int i;
+   puts("Plz enter the array that you wanna tansferred to int:");
+   s_gets(ar,SIZE);
+
+   i=ATOI(ar);
+
+printf("Now it is an array:%d\n",i);
+
+return 0;
+}
+
+int ATOI(char*ar)
+{  int tot=0;
+   int i=0;
+    while (isdigit(ar[i]))
+     {tot=tot*10+((int)ar[i]-48);
+       i++;}
+
+if (ar[i]=='\0')
+    return tot;             
+else 
+   return 0;
+}
+
+char* s_gets(char*ar,int size)
+{   char *p,*pa;
+    p=ar;
+    pa=fgets(ar,size,stdin);
+
+    if(pa)
+    {  while (*p!='\0'&&*p!='\n')
+          p++;
+   
+        if (*p=='\n')
+            *p='\0';
+        else 
+           while (getchar()!='\n');
+    }
+return pa;
+}
+         

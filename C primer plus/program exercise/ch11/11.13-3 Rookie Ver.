@@ -1,0 +1,23 @@
+#include<stdio.h>
+#define SIZE 40
+int main(void)
+{
+     char ar[SIZE];
+     char temp;
+     int i=0;
+puts("Please enter your word.");
+   while ( (temp=getchar())==' ');
+   do{ 
+      ar[i]=temp;
+      i++;
+                }
+   while ( (temp=getchar())!=' '&&temp!='\t'&&temp!='\v'&&temp!='\n' );
+
+    ar[i]='\0';  
+      while (getchar()!='\n');
+
+puts(ar);
+
+return 0;
+} 
+     

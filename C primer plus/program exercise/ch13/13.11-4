@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define BUF 256
+
+int main(int argc,char *argv[])
+{  
+     FILE *fp;
+     char line[BUF];
+     int i;
+     int count=0;   
+     if (argc==1)
+       {fprintf(stderr,"U need commad-line options.\n");
+        exit(EXIT_FAILURE);}
+     else 
+        for (i=1;i<argc;i++)
+         {if ((fp=fopen(argv[i],"r"))==NULL)
+             fprintf(stderr,"Unable to open file \"%s\"\n",argv[i]);
+          else 
+            {  
+               printf("%s contents:\n",argv[i]);
+
+               while (fgets(line,BUF,fp))
+                 fputs(line,stdout);
+               fclose(fp);
+               count++;
+            }
+          }
+printf("%d content%c %s been printed.",count,count>1?'s':' ',count>1?"have":"has");
+puts("DONE!");
+
+return 0;
+}

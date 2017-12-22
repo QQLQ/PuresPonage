@@ -1,0 +1,51 @@
+//Usage:./a.out [character] [filename]
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(int argc,char *argv[])
+{   FILE *fp;
+    char *p;
+    char ch;
+    int i,cfiles;  
+    long counts,total;
+    total=1L;
+    cfiles=0;
+    if (argc==1||argv[1][1]!='\0')
+       {fprintf(stderr,"Usage:%s [character] [filename]\n",argv[0]);
+        exit(EXIT_FAILURE);}
+
+    if (argc==2)
+       fp=stdin;
+    else
+        for (i=2;i<argc;i++)
+        {    if ( !(fp=fopen(argv[i],"r")) )       
+               fprintf(stderr,"Unable to open file %s.\n",argv[i]);
+             else 
+              {
+                 cfiles++;
+                 counts=0;
+                 p=argv[i];
+                 while (*p)
+                   {
+                    if (*p==argv[1][0])
+                       counts++;  
+                    p++;
+                    }
+                 while ( (ch=getc(fp))!=EOF )
+                      if (ch==argv[1][0])
+                         counts++;
+                total+=counts;
+                printf("%ld chars of %c so far. %ld chars for %s\n",total,argv[1][0],counts,
+                       argv[i]); 
+                if (fclose(fp))
+                    fprintf(stderr,"Error closing file %s\n",argv[i]);
+               }
+          }
+ printf("%d files successfully opened.%d fialed opening.%ld characters of %c in total.\n",
+        cfiles,argc-2-cfiles,total,argv[1][0]);
+puts("Done!");
+return 0;
+}
+
+
+//Really in a hurry, i gotta finish the while chapter 13 today.Sorry about "1 words".

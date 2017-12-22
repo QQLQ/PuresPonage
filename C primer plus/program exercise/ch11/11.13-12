@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<ctype.h>
+
+int main(void)
+{ int c,words,upper,lower,punct,numb,word_in;
+  char ch;
+      words=upper=lower=punct=numb=word_in=0;
+
+  for (c=0;(ch=getchar())!=EOF;c++)
+     { if (isalnum(ch))
+         { if (word_in==0)
+              {word_in=1;
+               words++;} 
+           if (islower(ch))
+              lower++;
+           if (isupper(ch))
+              upper++;
+           if (isdigit(ch))
+              numb++;
+          }
+        else if (ispunct(ch))
+              punct++;
+        else if (ch==' ')
+                if (word_in==1)
+                  word_in=0;
+      }
+    
+              
+printf("ch=%d,words=%d,upper=%d,lower=%d,punct=%d,numb=%d\n",c,words,upper,lower,punct,numb);
+
+return 0;
+}

@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(int argc,char *argv[])
+{
+     FILE *fp;
+     double x,tot;
+     tot=0;
+     int count=0;
+     
+
+
+        if (argc>2)
+           {printf("Usage: %s [filename]\n",argv[0]);
+            exit(EXIT_FAILURE);}
+        else if (argc==2)
+              {
+               if  ( (fp=fopen(argv[1],"r"))==NULL )
+                   {fprintf(stderr,"Unable to open \"%s\"\n",argv[1]);
+                    putchar('v'); 
+                    exit(EXIT_FAILURE);}
+              }     
+        else if(argc==1)
+              {puts("Please enter doubles.");
+               fp=stdin;} 
+                          
+
+     while (fscanf(fp,"%lf",&x)==1)
+         {tot+=x;	
+          count++;
+          if (argc==1)
+              printf("Please enter doubles(press q to quit):");}
+
+if (count>0)
+    printf("The even number of %d %s is %.3lf\n",count,count<2?"number":"numbers",tot/count);
+else
+   puts("Invalid data.");
+
+puts("DONE!");
+
+return 0;
+}             

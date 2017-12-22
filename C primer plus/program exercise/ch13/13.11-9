@@ -1,0 +1,59 @@
+/* addaword.c -- uses fprintf(), fscanf(), and rewind() */
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+ #include <ctype.h>
+ #define MAX 81
+ void update(int);
+ int main(void)
+ {
+     FILE *fp,*fpb;
+     char ch;
+     char words[MAX];
+     char line[MAX];
+     int count=0;
+     
+    if ((fp = fopen("wordy", "a+")) == NULL)
+      {
+       fprintf(stdout,"Can't open \"wordy\" file.\n");
+       exit(EXIT_FAILURE);
+       }
+
+    if ( fpb = fopen("COUNT", "r") )
+      {
+       fgets(line,MAX,fpb);
+       count=atoi(line);
+     if (fclose(fpb) != 0)
+        fprintf(stderr,"Error closing count file\n");
+       }
+
+    puts("Enter words to add to the file; press the #");
+    puts("key at the beginning of a line to terminate.");
+    puts("*Dont touch file COUNT, it is to count files.");
+    while ((fscanf(stdin,"%40s", words) == 1) && (words[0] != '#'))
+         {fprintf(fp, "%d.%s\n",++count, words);
+          update(count);}
+    
+  puts("File contents:");
+    rewind(fp); /* go back to beginning of file */
+   
+    while (fscanf(fp,"%s",words) == 1)
+           puts(words);
+    
+    puts("Done!");
+    
+   if (fclose(fp) != 0)
+        fprintf(stderr,"Error closing file\n");
+ return 0;
+ } 
+
+ void update(int count)
+{ FILE* fpb;
+    if ( (fpb = fopen("COUNT", "w"))==NULL )
+        fprintf(stderr,"ERROR writing COUNT.\n");
+
+      fprintf(fpb,"%d",count);
+
+     if (fclose(fpb) != 0)
+        fprintf(stderr,"Error closing count file\n");
+}

@@ -1,0 +1,59 @@
+#include<stdio.h>
+#define TIP "Gimme a string then i will delete all ' ' inside it(enter nothing to quit)."
+#define SIZE 40
+char* d_blank(char*);
+char* s_gets(char*,int);
+
+int main(void)
+{ char ar[SIZE];
+  
+  puts(TIP);
+  while (s_gets(ar,SIZE)&&ar[0]!='\0')
+    { d_blank(ar);
+      puts(ar);
+      puts(TIP);
+    }
+
+puts("BYE!");
+return 0;
+}
+
+char* s_gets(char*ar,int size)
+{   char *pa,*p;
+    p=ar;
+    
+    pa=fgets(ar,size,stdin);
+     
+    if (pa)
+    {
+       while (*p!='\0'&&*p!='\n')
+               p++;
+
+       if (*p=='\n')
+         *p='\0';
+       else 
+          while (getchar()!='\n');
+     }
+return pa;
+}
+
+char* d_blank(char*ar)
+{    char AR[SIZE];
+
+     int i=0;
+     int p=0;
+
+     while (ar[i]!='\0')
+      { if (ar[i]==' ')
+          i++;
+        else 
+          AR[p++]=ar[i++];
+           
+      }
+      AR[p]='\0';
+
+for (i=0;AR[i]!='\0';i++)
+     ar[i]=AR[i];
+ar[++i]='\0';
+return ar;
+}

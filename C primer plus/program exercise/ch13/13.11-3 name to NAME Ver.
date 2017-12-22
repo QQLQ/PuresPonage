@@ -1,0 +1,34 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<ctype.h>
+#define SIZE 81
+int main(void)
+{    FILE *fps,*fpt;
+     char ch;
+     char fname[SIZE];
+     char Fname[SIZE];
+     int i;      
+puts("Please enter file name.");
+    if (scanf("%s",fname)!=1)
+    {fprintf(stderr,"Invalid input.\n");
+     exit(EXIT_FAILURE);}
+
+    if ( (fps=fopen(fname,"r"))==NULL )
+    {fprintf(stderr,"Unable to open file %s\n",fname);
+     exit(EXIT_FAILURE);}
+
+for (i=0;fname[i]!='\0';i++)
+     Fname[i]=toupper(fname[i]);
+      
+    if ( (fpt=fopen(Fname,"w"))==NULL )
+    {fprintf(stderr,"Unable to open file %s\n",Fname);
+     exit(EXIT_FAILURE);}
+
+    while ( (ch=getc(fps))!=EOF)
+       putc(toupper(ch),fpt);
+
+puts("DONE!");
+return 0;
+}
+
+//Using non-english CPP, so i cant be sure this is what the exercise asked.But no worries, i got a different name to name ver.

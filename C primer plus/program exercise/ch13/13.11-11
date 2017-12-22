@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define BUF 255
+int main(int argc,char *argv[])
+{   
+    char line[BUF];
+    int count=0;
+    FILE *fp;
+    char *pt;
+
+    if (argc!=3)
+        {fprintf(stderr,"Usage:%s [searching strings] [files to be searched]\n",argv[0]);
+         exit(EXIT_FAILURE);}
+
+    if ( !(fp=fopen(argv[2],"r")) )
+        {fprintf(stderr,"Unable to open file %s",argv[2]);
+         exit(EXIT_FAILURE);}
+    
+    while (fgets(line,BUF,fp))
+        {
+         if (pt=strstr(line,argv[1]))
+         {printf("line %d:",++count);
+         fputs(line,stdout);}
+        }
+   
+ 
+    if (count>0)
+        printf("Searching completed, %d %s found.\n",count,count==1?"result":"results");
+    else
+        printf("Nothing found.\n");
+
+fclose(fp);
+
+return 0;
+}

@@ -1,0 +1,91 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+#define SIZE_N 81
+#define BUF 512
+char* s_gets(char*ar,int size);
+
+int main(void)
+{ 
+    char fname[SIZE_N];
+    char cpos[SIZE_N];    
+    char line[BUF];
+    long pos;
+    int x,set;
+    FILE *fp;
+
+   puts("Please enter a file name(empty line to quit).");
+   while ( s_gets(fname,SIZE_N) )
+   {    
+        if (fname[0]=='\0')
+          {puts("BYE!");
+           exit(EXIT_SUCCESS);}
+
+        if ( !(fp=fopen(fname,"r")) )
+          {fprintf(stderr,"Unable to open file %s.\n",fname);
+           continue;}
+   
+      printf("Please enter a postion you wanna begin,s for beginning,e for end:");
+      while ( !(s_gets(cpos,SIZE_N)) || cpos[1]!='\0')
+          {fprintf(stderr,"Invalid input,you must enter s or e.\n");
+           continue;}   
+
+      if (cpos[0]=='s')
+        {set=SEEK_SET;
+         printf("Now enter the number you wanna set(from begining)(<0 to quit).\n");}
+      else if (cpos[0]=='e')
+             {set=SEEK_END;
+              printf("Now enter the number you wanna set(from end)(<0 to quit).\n");}
+     
+     while (x=scanf("%ld",&pos),1)
+           {
+            if (pos<0)
+               {puts("BYE!");
+                exit(EXIT_SUCCESS);}
+
+            while(getchar()!='\n');
+
+            if (x!=1)
+              {fprintf(stderr,"Invalid input,do it again.\n");
+                continue;}
+            printf("POS=%ld\n",pos);
+      
+            if (cpos[0]=='e')
+            pos=-pos;            
+
+            if ( fseek(fp,pos,set) )
+              {fprintf(stderr,"Invalid input,the number is over limit,input it again.\n");  
+                continue;}
+            break;
+            }  
+
+            fgets(line,BUF,fp);
+            fputs(line,stdout);
+
+       fclose(fp);
+     puts("Please enter the next file name(empty line to quit).");
+
+     }
+puts("DONE!");
+
+return 0;
+}
+
+char* s_gets(char*ar,int size)
+{    char *pp,*p;
+      
+     p=ar;
+     pp=fgets(ar,size,stdin);
+
+     if (pp)
+     { 
+        while (*p!='\0'&&*p!='\n')
+           p++;
+
+        if (*p='\n')
+         *p='\0';
+        else
+          while (getchar()!='\n');
+     }
+return pp;
+}

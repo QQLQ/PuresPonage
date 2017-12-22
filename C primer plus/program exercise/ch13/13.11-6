@@ -1,0 +1,41 @@
+// reducto.c -- reduces your files by two-thirds!
+ #include <stdio.h>
+ #include <stdlib.h>                              // for exit()
+ #include <string.h>
+ #define LEN 40
+
+ int main(void)
+ {
+     FILE *in, *out;                              // declare two FILE pointers
+     int ch;
+     char name[LEN];                              // storage for output filename
+     int count = 0;
+         
+     while (scanf("%s",name)!=1)
+         {fprintf(stderr,"Invalid input\n");
+          exit(EXIT_FAILURE);}
+  
+     if ((in = fopen(name, "r")) == NULL)      // set up input
+        {
+         fprintf(stderr, "I couldn't open the file \"%s\"\n",
+         name);
+         exit(EXIT_FAILURE);
+         }
+// set up output 
+     strcat(name,".red");                         // append .red
+     
+      if ((out = fopen(name, "w")) == NULL)
+       {                                            // open file for writing
+        fprintf(stderr,"Can't create output file.\n");
+        exit(3);
+      }
+                                                   // copy data
+     while ((ch = getc(in)) != EOF)
+     if (count++ % 3 == 0 )
+     putc(ch, out); // print every 3rd char
+     // clean up
+     if (fclose(in) != 0 || fclose(out) != 0)
+     fprintf(stderr,"Error in closing files\n");
+ 
+return 0;
+ } 

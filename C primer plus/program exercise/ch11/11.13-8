@@ -1,0 +1,66 @@
+#include<stdio.h>
+#define TBS "Enter the string to be searched:"
+#define TS  "Enter the string to search:"
+#define SIZE 40
+
+char* string_in(char*,char*);
+char* s_gets(char*,int);
+
+int main(void)
+{  char tar[SIZE];
+   char ar[SIZE];
+   char *pt;  
+    
+   puts(TBS); 
+   while ( s_gets(tar,SIZE) &&tar[0]&& (puts(TS),s_gets(ar,SIZE))&&ar[0])
+       {  pt=string_in(tar,ar);
+ 
+         if (pt)
+            {printf("\"%s\" is in,from here:",ar);
+            puts(pt);}
+          else        
+            puts("no such strings inside.");
+    
+        puts(TBS); 
+       }
+
+if (tar[0]=='\0'||ar[0]=='\0')
+    printf("BYE!\n");
+else
+    puts("Invalid input.BYE!");
+
+return 0;
+}
+
+
+char* string_in(char*tar,char*ar)
+{   int i,n;
+    for (i=0;tar[i]!='\0';i++)
+      {  if (tar[i]==ar[0])
+           for (n=0;tar[i+n]==ar[n];)
+               { n++;
+                 if (ar[n]=='\0')
+                  return &tar[i];
+                }
+      }
+return NULL;
+} 
+
+
+char* s_gets(char*ar,int size)
+{    char *pa;
+     int i=0;
+     
+     pa=fgets(ar,size,stdin);
+     if (pa)
+       { while (ar[i]!='\0'&&ar[i]!='\n')
+           i++;
+
+         if (ar[i]='\n')
+             ar[i]='\0';
+         else 
+           while (getchar()!='\n');
+        }
+return pa;
+}
+       

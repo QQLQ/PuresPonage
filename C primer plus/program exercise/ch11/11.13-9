@@ -1,0 +1,66 @@
+#include<stdio.h>
+#define SIZE 40
+#define TIP "Please enter your string and i am gonna reverse it!"
+char* reverse(char*);
+char* s_gets(char*,int);
+
+int main(void)
+{
+    char ar[SIZE];
+ 
+   puts(TIP);   
+   while (s_gets(ar,SIZE)&&ar[0]!='\0')
+       { puts(reverse(ar));
+         puts(TIP);}
+
+ puts("BYE!");
+return 0;
+}
+
+char* s_gets(char*ar,int size)
+{    char *p,*pa;
+    pa=fgets(ar,size,stdin);
+    p=ar;
+   if (pa)
+    {  while (*p!='\0'&&*p!='\n')
+          p++;
+
+        if (*p=='\n')
+          *p='\0';
+        else 
+         while (getchar()!='\n');
+     }
+return pa;
+}
+
+char* reverse(char*ar)
+{    char AR[SIZE];
+     int n,i;
+     char *p;
+      p=ar;
+     n=i=0;
+  while (*p!='\0')
+    {p++;
+     i++;}
+if (i>0)
+  { 
+   while (i>0)
+     { 
+      AR[n]=*--p;
+      n++;
+      i--;
+      }
+     AR[n]='\0';
+
+   while (AR[i]!='\0')
+       {ar[i]=AR[i];
+        i++;} 
+     ar[i]='\0';
+   
+  }
+return ar;
+}  
+     
+  
+
+      

@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#define SIZE 1000
+
+static void count(int *,int *,int);
+
+int main(void)
+{   int ar[SIZE],AR[10];
+    int i,seed;
+    AR[0]=0;
+
+puts("Enter seed:");
+
+  while (scanf("%d",&seed)==1)
+   {
+    srand(seed);
+    for (i=0;i<SIZE;i++)
+      ar[i]=rand()%10+1;
+     count(ar,AR,SIZE);
+
+    for (i=0;i<10;i++)
+      {printf("NUM%2dT=%2d ",i+1,AR[i]);
+       if ( (i+1)%5==0 )
+         putchar('\n');
+       }
+    puts("Enter seed:");
+    }
+
+puts("DONE!");
+return 0;
+}
+
+void count(int *ar,int *AR,int size)
+{   int i;
+    for (i=0;i<10;i++)
+      AR[i]=0;
+
+   for (i=0;i<size;i++)
+      AR[ar[i]-1]++;
+
+return;
+}

@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<string.h>
+#define SIZE 40
+
+char* s_gets(char*,int);
+
+int main(void)
+{
+     char x[SIZE];
+     s_gets(x,SIZE);
+     
+puts(x);
+
+return 0;
+}
+
+char* s_gets(char*str,int size)
+{
+      char *p,*x;
+      p=fgets(str,size,stdin);
+ 
+      if (x=strchr(str,'\n'))
+         *x='\0';
+
+return p;
+}

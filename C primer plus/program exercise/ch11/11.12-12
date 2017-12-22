@@ -1,0 +1,61 @@
+#include<stdio.h>
+#define SIZE 20
+char* s_gets(char*,int);
+char* acpt(char*);
+
+int main(void)
+{
+    char*px;
+    
+    char x[SIZE];
+
+    s_gets(x,SIZE);
+    
+puts(x);
+
+px=acpt(x);
+    if (px)
+      puts(px);
+    else
+      puts("No blank");
+
+return 0;
+}
+
+char* s_gets(char*str,int size)
+{
+      char *p,*x;
+      p=fgets(str,size,stdin);
+      x=str;
+      
+      if (p)
+      {
+         while (*x!='\0'&&*x!='\n')
+              x++;
+
+         if (*x=='\n')
+             *x='\0';
+         else 
+             while (getchar()!='\n');
+
+    }
+
+return p;
+}
+
+char* acpt(char*st)
+{  char *pa;
+    
+   pa=st;
+ 
+   while (*pa!=' '&&*pa!='\0')
+         pa++;
+
+   if (*pa==' ')
+       return pa;
+   else 
+      return NULL;
+}
+        
+          
+   

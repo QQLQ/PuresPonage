@@ -1,0 +1,63 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define BUF 256
+
+char* s_fgets(char*line,int size,FILE *fp);
+
+int main(int argc,char *argv[])
+{
+   FILE *fp1,*fp2;
+   char line1[BUF];
+   char line2[BUF];
+   char *p1,*p2;
+   int counts=0;
+
+   if (argc!=3)
+     {fprintf(stderr,"Usage:%s [filename 1] [filename 2]\n",argv[0]);
+      exit(EXIT_FAILURE);}
+
+   if ( !(fp1=fopen(argv[1],"r")) )
+     {fprintf(stderr,"Unable to open file %s.\n",argv[1]);
+      exit(EXIT_FAILURE);}
+      
+   if ( !(fp2=fopen(argv[2],"r")) )
+     {fprintf(stderr,"Unable to open file %s.\n",argv[2]);
+      exit(EXIT_FAILURE);}
+
+
+      do 
+     { 
+       printf("line %d:",++counts);        
+       if (p1=s_fgets(line1,BUF,fp1))
+         fputs(line1,stdout);
+      
+       putchar('#');                         //To seperate.
+      
+       if (p2=s_fgets(line2,BUF,fp2))
+         fputs(line2,stdout);
+
+       putchar('\n');
+      }  while (p1||p2);
+
+fclose(fp1);
+fclose(fp2);
+
+printf("%d %s been printed\n",counts,counts==1?"line has":"lines have");
+puts("DONE!");
+
+return 0;
+}
+
+char* s_fgets(char*line,int size,FILE *fp)
+{    char *p, *pp;
+     p=line;
+     pp=fgets(line,size,fp);
+    if (pp)
+    {  
+      while (*p!='\n'&&*p!='\0')
+          p++;
+       if (*p=='\n')
+         *p='\0';
+     }
+return pp;
+} 

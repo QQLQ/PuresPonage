@@ -1,0 +1,62 @@
+#include<stdio.h>
+#define SIZE 40
+#define TSTR "Please enter the string to be searched(press enter but notnig to quit):"
+#define TCH  "Please enter the character to search:"
+char* s_gets(char*,int);
+char* STRCHR(char*,int);
+
+int main(void)
+{    char AR[SIZE];
+     char ch;
+     char *pt;  
+  puts(TSTR);
+  s_gets(AR,SIZE);
+
+  
+ while  ( AR[0]!='\0'&&(puts(TCH),(scanf("%c",&ch)==1)) )
+  {pt=STRCHR(AR,ch);
+   puts(AR);
+   if (pt)
+         puts(pt);
+     else
+         printf("pt=%p,which means no such ch inside.\n",pt);
+  while (getchar()!='\n');
+  puts(TSTR); 
+  s_gets(AR,SIZE);
+  }
+
+puts("Bye!");
+return 0;
+}
+
+char* s_gets(char*ar,int size)
+{
+    char *pa;
+    int i;
+
+   pa=fgets(ar,size,stdin);
+
+   if (pa)
+   {
+      for (i=0;ar[i]!='\n'&&ar[i]!='\0';i++);
+
+      if (ar[i]='\n')
+          ar[i]='\0';
+      else 
+         while (getchar()!='\n');
+    }
+
+return pa;
+}
+
+char* STRCHR(char*ar,int ch)
+{
+     int i=0;
+   while (ar[i]!='\0')
+      {if (ar[i]==ch)
+            return &ar[i];
+       i++;
+       }
+    return NULL;
+}
+          

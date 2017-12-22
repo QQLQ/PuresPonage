@@ -1,0 +1,69 @@
+#include<stdio.h>
+#include<string.h>
+#define SIZE 40
+#define TIP1 "Enter an int as n,we will fetech the next n characters"
+#define TIP2 "from yout next input to store in the designed array."
+char* get(char*,char*;);
+char* s_gets(char*,int);
+
+int main(void)
+{
+    char AR[SIZE];
+    char AP[SIZE];
+    char *p;
+    puts("Now enter a sentence:");   
+
+    s_gets(AR,SIZE);
+
+    p=get(AP,AR);
+
+printf("%s\n",p);
+puts("DONE!");
+return 0;
+}
+
+char* get(char*ap,char*ar)
+{
+   int n;
+   int i;
+   char ay[SIZE];
+   char pt[SIZE];
+
+   printf(TIP1);
+   puts(TIP2);
+
+   scanf("%d",&n);
+  if (n<strlen(ar))
+    {for (i=0;i<n&&ar[i]!=' '&&ar[i]!='\v'&&ar[i]!='\t'&&ar[i]!='\n';i++)
+        ay[i]=ar[i];
+        ay[i]='\0';}
+  else
+    {for (i=0;ar[i]!=' '&&ar[i]!='\v'&&ar[i]!='\t'&&ar[i]!='\n'&&ar[i]!='\0';i++)
+         ay[i]=ar[i];
+         ay[i]='\0';}
+     
+return strcpy(ap,ay);           
+}
+
+char* s_gets(char*ar,int size)
+{
+    char *pt,*pa;
+    pa=ar;
+
+    pt=fgets(ar,size,stdin);
+
+    if (pt)
+    {
+        while (*pa!='\0'&&*pa!='\n')
+            pa++;
+
+     if (*pa='\n')
+         *pa='\0';
+     else 
+       while (getchar()!='\n');
+    }
+return pt;
+}
+    
+  
+ 

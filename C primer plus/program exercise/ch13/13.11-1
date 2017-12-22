@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define SIZE 40
+int main(void)
+{  char fname[SIZE];
+   char ch;
+   long count=0;
+   puts("Enter filename.");
+   FILE *fp;
+
+   if (scanf("%s",fname)!=1)
+    {fprintf(stderr,"Invalid input.\n");
+     exit(EXIT_FAILURE);}
+
+   if ( (fp=fopen(fname,"r"))==NULL)
+       {fprintf(stderr,"Unable to open \"%s\".\n",fname);
+        exit(EXIT_FAILURE);}
+ 
+    while ( (ch=getc(fp))!=EOF )
+       { putc(ch,stdout);
+         count++;}
+fclose(fp);
+printf("FILE \"%s\" has %ld characters\n",fname,count);
+puts("Done!");
+
+return 0;
+}

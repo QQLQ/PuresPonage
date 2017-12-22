@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<string.h>
+#define SIZE 40
+#define ANSWER "Grant"
+char* s_gets(char*,int);
+
+int main(void)
+{
+   char name[SIZE];
+   int i,x;
+   x=i=0;
+
+printf("Who is inside Grant's tomb?\n");
+
+s_gets(name,SIZE);
+
+while (i<strlen(name)||i<strlen(ANSWER))
+     {   
+        
+       if (i==strlen(name)-1)
+           {fputs("Not correct!Enter again:",stdout);
+               i=0;
+               s_gets(name,SIZE);
+               continue;
+            }
+    
+ 
+           while (name[i+x]==ANSWER[x])
+            { printf("x=%d,i=%d c=%c\n",x,i,name[i+x]); 
+                 if (x==(strlen(ANSWER)-1))
+                    {puts("CORRECT!");
+                     return 0;}
+               x++;
+             }
+      x=0;      
+      i++;
+    }         
+   printf("x=%d,i=%d c=%c\n",x,i,name[i+x]);
+puts("ERROR!");
+return 0;
+            
+}
+
+char* s_gets(char*st,int size)
+{
+    int i;
+    char*p;
+     p=fgets(st,size,stdin);
+    if (p)
+     {for (i=0;st[i]!='\0'&&st[i]!='\n';i++); 
+
+        if (st[i]=='\n')
+             st[i]='\0';
+         else
+           while (getchar()!='\n');
+      }
+return p;
+}

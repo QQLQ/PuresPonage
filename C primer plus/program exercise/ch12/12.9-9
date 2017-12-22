@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define Q1 "How many words do you wish to enter?"
+#define SIZE 15
+int w_count(char*pt);
+
+int main(void)
+{    int size,i;
+     char **pa;
+     char*temp;
+     printf(Q1);
+     scanf("%d",&size);
+
+     pa=(char**)malloc(size*sizeof(char*));
+     
+     printf("Enter %d %s now:\n",size,size<=1?"word":"words");
+ 
+     char(*ptemp)[SIZE]=(char(*)[SIZE])malloc(size*SIZE*sizeof(char));
+
+     for (i=0;i<size;i++)
+       scanf("%s",ptemp[i]);
+
+     for (i=0;i<size;i++)
+       {
+       pa[i]=(char*)malloc(strlen(ptemp[i]+1)*sizeof(char));
+       pa[i]=ptemp[i];
+       }
+     puts("Here are your words:");
+     for (i=0;i<size;i++)
+        printf("%s\n",pa[i]);  
+     free(pa);
+     free(ptemp);
+puts("DONE!");
+
+return 0;
+}      
+     

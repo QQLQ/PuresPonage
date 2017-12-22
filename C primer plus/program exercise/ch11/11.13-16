@@ -1,0 +1,50 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+
+char CHECK(char*);
+
+int main(int n,char*ar[])
+{ 
+  char ch,c;
+
+if (n==1)
+  ch='p';
+else
+  ch=CHECK(ar[1]);
+
+      {switch (ch)
+         {  case 'p':
+               puts("Will be printed as it is:");
+               while ((c=getchar())!=EOF)
+                 putchar(c);
+                 break;  
+            case 'u':
+               puts("Will be printed as Uppers:");
+               while ((c= toupper(getchar()) )!=EOF)
+                 putchar(c);
+                 break;  
+            case 'l':
+               puts("Will be printed as Lowers:");
+               while ((c= tolower(getchar()) )!=EOF)
+               putchar(c);
+               break;
+           }
+        }
+puts("DONE!");
+
+return 0;
+}
+
+char CHECK(char*ar)
+{
+   if (strstr(ar,"-u"))
+      return 'u';
+   if (strstr(ar,"-l"))
+      return 'l';
+   if (strstr(ar,"-p"))
+      return 'p';
+   else 
+      return 'p';
+}
+   

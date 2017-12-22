@@ -1,0 +1,201 @@
+#include<stdio.h>
+#include<string.h>
+#define LIM 10
+#define SIZE 50
+
+char MENU(void);
+char* s_gets(char*,int);
+int enter(char(*)[],int,int);
+void Print(char(*)[],int);
+void Pri_AII(char(*)[],int);
+void Pri_Len(char(*)[],int);
+void Pri_Lo1(char[][*],int);
+int Len1st(char*);
+
+int main(void)
+{  char ar[LIM][SIZE];
+   char ch;  
+   int t;
+   t=enter(ar,LIM,SIZE);
+  
+    while ( ch=MENU() )
+     {
+         switch (ch)
+          {   case 'a':Print(ar,t);continue;
+              case 'b':Pri_AII(ar,t);continue;
+              case 'c':Pri_Len(ar,t);continue;
+              case 'd':Pri_Lo1(ar,t);continue;
+              case 'q':puts("Ok,bye!");return 0;
+              default:puts("invalid input,try agian!");continue;
+          }
+     }
+puts("DONE!");
+
+return 0;
+}
+
+char* s_gets(char*ar,int size)
+{   char *p,*pa;
+    p=ar;
+    pa=fgets(ar,size,stdin);
+
+    if(pa)
+    {  while (*p!='\0'&&*p!='\n')
+          p++;
+   
+        if (*p=='\n')
+            *p='\0';
+        else 
+           while (getchar()!='\n');
+    }
+return pa;
+}
+         
+char MENU(void)
+{  int i;
+   char ch;  
+   for (i=0;i<45;i++)
+       putchar('*');
+ putchar('\n');
+ printf("%-40s%-40s\n","a.)Just print.","b.)Print by ASCII");
+ printf("%-40s%-40s\n","c.)Print by leghth(from shortest).","d.)Print by length of 1st word");
+ printf("%-20s\n","q.)Quit.");
+ putchar('\n');
+   for (i=0;i<45;i++)
+       putchar('*');
+    putchar('\n');
+printf("Now enter your choice:");
+ 
+   ch=getchar();
+while (getchar()!='\n');
+
+return ch;
+}
+
+int enter(char ar[][SIZE],int lim,int size)
+{   int n,i;
+    n=0;
+    puts("plz enter ten strings.");
+
+  do
+   {  printf("Plz enter string %d:\n",n+1);
+      s_gets(ar[n],size);
+       n++;
+    }  while (n<lim&&ar[n-1][0]!='\0');
+    
+    printf("You have entered %d strings.\n",i=(ar[n-1][0]=='\0'?n-1:n));
+
+return i;
+}
+
+
+void Print(char(*ar)[SIZE],int t)
+{  int n;
+printf("%d strings are printed as following:\n",t);
+    for (n=0;n<t;n++)
+      {printf("string %d:",n+1);
+       puts(ar[n]);}
+  
+return;
+}
+
+void Pri_AII(char(*ar)[SIZE],int t)
+{ 
+   int n,m,i,x;
+   char *p[t],*temp;  
+
+printf("%d strings are printed by ASCII:\n",t);
+
+    for (x=0;x<t;x++)
+       p[x]=ar[x];
+       
+
+    for (n=0;n<t;n++)
+       for (m=n+1;m<t;m++)
+           for (i=0;i<SIZE;i++)
+            {
+             if (p[n][i]-p[m][i]>0)
+                {
+                 temp=p[n];
+                 p[n]=p[m];
+                 p[m]=temp;
+                 break;
+                 }
+             else if (p[n][i]-p[m][i]<0)
+                break;
+            }
+    for (x=0;x<t;x++)
+      {
+       printf("string %d:",x+1);
+       puts(p[x]);
+       }
+                   
+return;
+}
+
+void Pri_Len(char(*ar)[SIZE],int t)
+{   int n,i,x,z;
+    char *p[t];
+    char *temp;
+printf("%d strings are printed by length:\n",t);
+for (x=0;x<t;x++)
+   p[x]=ar[x];
+
+   for (n=0;n<t;n++)
+    for (i=n+1;i<t;i++)
+      if (strlen(p[n])>strlen(p[i]))
+         {
+          temp=p[n];
+          p[n]=p[i];
+          p[i]=temp;
+         }
+
+    for (z=0;z<t;z++)
+      {
+       printf("string %d:",z+1);
+       puts(p[z]);
+       }
+return;
+}
+
+void Pri_Lo1(char ar[][SIZE],int t)
+{   int n,i,x,z;
+    char *p[t];
+    char *temp;
+
+printf("%d strings are printed by length of 1st word:\n",t);
+for (x=0;x<t;x++)
+   p[x]=ar[x];
+
+
+
+   for (n=0;n<t;n++)
+    for (i=n+1;i<t;i++)
+      if (Len1st(p[n])>Len1st(p[i]))
+         {
+          temp=p[n];
+          p[n]=p[i];
+          p[i]=temp;
+         }
+
+    for (z=0;z<t;z++)
+      {
+       printf("string %d:",z+1);
+       puts(p[z]);
+       }
+return;
+}
+
+int Len1st(char*ar)
+{   int n,i;
+    n=0;
+while (ar[n]==' ')
+    n++;
+    for (i=0;ar[i+n]!='\0'&&ar[i+n]!=' ';i++);
+
+return i;
+}
+        
+
+
+

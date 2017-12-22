@@ -1,0 +1,54 @@
+#include<stdio.h>
+#include<string.h>
+#define SIZE 10
+char* s_gets(char*,int);
+char* gett(char*);
+
+int main(void)
+{   
+    char AR[SIZE];
+
+    puts("Please enter your word:");
+
+    gett(AR);
+
+puts(AR);
+
+return 0;
+}
+
+char* s_gets(char*ar,int size)
+{
+     char*pa,*pt;
+     int i=0;
+     pt=ar;
+     pa=fgets(ar,size,stdin);
+
+    if (pa)
+     { while (*pt!='\0'&&*pt!='\n')
+          pt++;
+
+       if (*pt=='\n')
+          *pt='\0';
+       else 
+         while (getchar()!='\n');
+     }
+return pa;
+}     
+
+char* gett(char*AR)
+{  char ar[SIZE];
+   char *x,*w;
+
+    w=AR;  
+    x=s_gets(ar,SIZE);
+    while (*x==' ')
+       x++;
+    
+    while (*x!=' '&&*x!='\t'&&*x!='\v'&&*x!='\n'&&*x!='\0')
+      *w++=*x++;
+
+   *w='\0';
+
+return AR;
+}

@@ -1,0 +1,35 @@
+#include<stdio.h>
+#define SIZE 20
+char* s_gets(char*,int);
+
+int main(void)
+{
+    char x[SIZE];
+
+    s_gets(x,SIZE);
+
+    puts(x);
+
+return 0;
+}
+
+char* s_gets(char*str,int size)
+{
+      char *p,*x;
+      p=fgets(str,size,stdin);
+      x=str;
+      
+      if (p)
+      {
+         while (*x!='\0'&&*x!='\n')
+              x++;
+
+         if (*x=='\n')
+             *x='\0';
+         else 
+             while (getchar()!='\n');
+
+    }
+
+return p;
+}

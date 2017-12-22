@@ -1,0 +1,27 @@
+#include<stdio.h>
+#define SIZE 80
+int strl(char*);
+
+int main(void)
+{   int i;
+   
+    char x[SIZE]="WHERE!";
+   
+    i=strl(x);
+  
+    printf("length of x is %d.(%s)\n",i,x);
+
+return 0;
+}
+
+int strl(char*st)
+{
+     int count=0;
+
+     int index=0;
+
+while (st[index++]!='\0')
+     count++;
+
+return count;
+}

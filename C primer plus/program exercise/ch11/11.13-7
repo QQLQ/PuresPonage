@@ -1,0 +1,72 @@
+#include<stdio.h>
+#include<string.h>
+#define SIZE 40
+#define TST "Please enter the string that you wanna coppy(enter nothing to quit):"
+#define TOT "Please enter the string to be copied to(enter nothing to quit):"
+#define TNT "Please enter the numbert of characters that you wanna copy to:"
+char* mystrncpy(char*,char*,int);
+char* s_gets(char*,int);
+int main(void)
+{   char tar[SIZE];
+    char ar[SIZE];
+    int n;
+puts(TOT);
+while (s_gets(tar,SIZE)&&tar[0]!='\0'&&(puts(TST),s_gets(ar,SIZE))&&ar[0]!='\0') 
+ { puts(TNT);
+   if (scanf("%d",&n)==1) 
+     { 
+      while (getchar()!='\n');
+      mystrncpy(tar,ar,n);
+ 
+      printf("ar=");
+      puts(ar);
+ 
+      printf("tar=");
+      puts(tar);
+       
+      puts(TOT);
+      continue;
+     } 
+    printf("Invalid input.");
+    puts(TST);
+  }
+puts("Bye!");
+
+ return 0;
+}
+
+char* mystrncpy(char*tar,char*ar,int n)
+{  int i=0;
+   
+   char *p;        
+   p=tar;
+   
+          
+   while (i<n&&ar[i]!='\0')
+    *p++=ar[i++];
+
+                    //I am not quite sure what this meant.No '\0'to end tar?Big mistake.
+                    //Maye i should put 'if (strlen(ar)>=n)'here as it asked. 
+    *p='\0';
+        
+
+return tar;
+
+}
+
+char* s_gets(char*ar,int size)
+ {    char*p;
+      int i=0;
+      p=fgets(ar,size,stdin);
+
+    if (p)
+    {  while (ar[i]!='\0'&&ar[i]!='\n')
+          i++;
+
+       if (ar[i]=='\n')
+           ar[i]='\0';
+       else 
+         while (getchar()!='\n'); 
+     }
+return p;
+}

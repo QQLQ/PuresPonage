@@ -1,0 +1,37 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<ctype.h>
+#define BUF 4096
+#define SIZE 40
+int main(void)
+{
+    FILE *fp;
+    char fname[SIZE];
+    int ch;
+    long pos,count;
+    count=0;
+puts("Please enter file name.");
+    if (scanf("%s",fname)!=1)
+    {fprintf(stderr,"Invalid input.\n");
+     exit(EXIT_FAILURE);}
+
+    if ( (fp=fopen(fname,"r+"))==NULL )
+    {fprintf(stderr,"Unable to open file %s\n",fname);
+     exit(EXIT_FAILURE);}
+printf("S=%ld\n",ftell(fp));        
+    while ( (ch=getc(fp))!=EOF)
+           {
+            printf("O=%ld ",ftell(fp));  //*1
+            fseek(fp,-1,SEEK_CUR);
+            printf("A=%ld ",ftell(fp));  //*2
+            putc(toupper(ch),fp);
+            printf("B=%ld\n",ftell(fp)); //*3
+            }
+fclose(fp);
+
+puts("DONE!");
+return 0;
+}
+
+//*1,*2,*3are for you to understand how the positon indicater move.You can delete
+//them,if you don't need them,for sure.

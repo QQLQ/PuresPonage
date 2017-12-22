@@ -1,0 +1,18 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main(int z,char*ar[])
+{ 
+  int i,y;
+  double tot,x;
+
+   x=atof(ar[1]);
+   y=atoi(ar[2]);
+ 
+    tot=1;
+ 
+   for (i=0;i<y;i++)
+     tot*=x;
+    
+printf("%g powerd by %d is %g",x,y,tot);
+return tot;
+}
