@@ -1,0 +1,14 @@
+#include<iostream>
+#include<vector>
+
+int main(void)
+{
+   using namespace std;
+   int size;
+   cout<<"Enter the size please."<<endl;
+   cin>>size;
+   int* pt=new int[size];
+   delete pt;
+   vector<int>ar(size);
+   return 0;
+}
