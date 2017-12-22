@@ -1,0 +1,273 @@
+/*list.h*/
+#ifndef _LIST_H
+#define _LIST_H
+#include<stdbool.h>
+#define MSIZE 45
+
+typedef struct {
+    char movie[MSIZE];
+    int rating;  
+     } Item;
+
+typedef struct node{
+     Item item;
+     struct node* next;
+     }Node;
+
+typedef Node* List;
+
+void Initialize(List*plist);
+
+bool IsFull(List*plist);
+
+bool IsEmpty(List*plist);
+
+bool AddItem(List*plist,Item item);
+
+void EmptyTheList(List*plist);
+
+void Traverse(List*plist,void (*pfun)(Item item));
+
+unsigned int ItemCount(List*plist);
+
+void Delete(List*plist,unsigned int num);
+
+#endif
+/*main.c*/
+#include<stdio.h>
+#include<stdlib.h>
+#include"list.h"
+
+char* sgets(char* line,int size)
+{
+  char *p,*pt;
+  p=line; 
+  pt=fgets(line,size,stdin);
+  if (pt)
+   {
+    while (*p!='\n'&&*p!='\0')
+        p++;
+
+    if (*p='\n')
+      *p='\0';
+    else 
+      while (getchar()!='\n');
+   }
+return pt;
+} 
+
+void showmovie(Item item)
+{
+ printf("Movie:%s  Rating:%d\n",item.movie,item.rating);
+ return;
+}
+ 
+
+int main(void)
+{
+  char line[MSIZE];
+  List movie;
+  Item temp;
+  unsigned int num;
+
+  Initialize(&movie);
+  
+  if (IsFull(&movie))
+    {
+     fprintf(stderr,"No memorary available.\n");
+     exit(EXIT_FAILURE);
+    }
+
+  puts("Please enter the movie");
+  while (sgets(temp.movie,MSIZE)!=NULL&&temp.movie[0]!='\0')
+    {
+     printf("Please eneter rating for %s.\n",temp.movie);
+     while (scanf("%d",&temp.rating)!=1)
+      {
+       while (getchar()!='\n');
+       puts("Invalid input,must be int from 0-10");   
+      }
+     while (getchar()!='\n');
+ 
+     if (false==AddItem(&movie,temp))  
+     {
+      fprintf(stderr,"Ubable to allocate memorary.\n");
+      break;
+     }
+     if (true==IsFull(&movie))
+     {
+      fprintf(stderr,"The list is now full\n");
+      break;
+      }
+     puts("Please enter the next movie");
+    }
+
+if (movie==NULL)
+  printf("No data entered.\n");
+else 
+  {
+   printf("Movie list as following:\n");
+   Traverse(&movie,showmovie);
+   }
+
+printf("You have entered %u movies.\n",ItemCount(&movie));
+
+while (printf("which one do you wanna delete?(non-number to quit)\n"),scanf("%u",&num)==1)
+   {
+     while (getchar()!='\n');
+     if (num<1&&num>ItemCount(&movie))
+       {
+        printf("Invalid input,enter again.(int must be from 1 to %u)\n",ItemCount(&movie));
+        continue;    
+        }
+     Delete(&movie,num);
+     }
+
+if (movie==NULL)
+  printf("No data entered.\n");
+else 
+  {
+   printf("Movie list as following:\n");
+   Traverse(&movie,showmovie);
+   }
+
+
+EmptyTheList(&movie);
+
+return 0;
+}   
+        
+/*fun.c*/
+#include<stdio.h>
+#include<stdlib.h>
+#include"list.h"
+
+void Initialize(List*plist)
+{
+ *plist=NULL;
+}
+
+bool IsFull(List*plist)
+{
+  Node* pt;
+  bool full;
+  pt=(Node*)malloc(sizeof(Node));
+  if (pt==NULL)
+    full=true;
+  else 
+    full=false;
+return full;
+}
+
+bool IsEmpty(List*plist)
+{
+  if (*plist==NULL)
+    return true;
+  else 
+    return false;
+}
+
+bool AddItem(List*plist,Item item)
+{
+   Node* pt;
+   Node*scan;
+
+   pt=(Node*)malloc(sizeof(Node));
+   if (pt==NULL)
+   {
+    fprintf(stderr,"Unable to accloate memory\n");
+    return false;
+   }
+
+pt->next=NULL;
+pt->item=item;
+
+if (*plist==NULL)
+   *plist=pt;
+else
+  {
+   scan=*plist; 
+   while (scan->next!=NULL)
+    scan=scan->next;
+   scan->next=pt;
+   }
+
+return true;
+}
+
+void EmptyTheList(List*plist)
+{
+  Node*psave;
+  while (*plist!=NULL)
+   {
+    psave=(*plist)->next;
+    free(*plist);
+    *plist=psave;
+    }
+return;
+}
+
+void Traverse(List*plist,void (*pfun)(Item item))
+{
+    if (*plist==NULL)
+       printf("NULL\n");
+
+    Node*pt=*plist;
+    while (pt!=NULL)
+    {
+     pfun(pt->item);
+     pt=pt->next;
+    }
+return;
+}   
+
+unsigned int ItemCount(List*plist)
+{
+    unsigned int size=0;
+    Node*pt=*plist;
+
+    while (pt!=NULL)
+     {
+      size++;
+      pt=pt->next;
+     }
+return size;
+}
+
+void Delete(List*plist,unsigned int num)
+{
+  unsigned int i=1;
+  Node *pprev, *scan, *pnext;
+if (true==IsEmpty(plist))
+  {
+   printf("No data.\n");
+   return;
+   }
+ 
+  scan=*plist;
+if (num>1)
+ {
+  while (i<num-1)
+   {
+    i++;
+    scan=scan->next;
+   }
+   pprev=scan;
+   scan=scan->next;
+   pprev->next=scan->next;
+   free(scan);
+  }
+else
+  {
+   scan=*plist;
+   *plist=(*plist)->next;
+   free(scan);
+   }
+
+if (true==IsEmpty(plist))
+  {
+   printf("No data left.\n");
+   return;
+   }
+return;
+}

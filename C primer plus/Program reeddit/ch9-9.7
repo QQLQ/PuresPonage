@@ -1,0 +1,32 @@
+#include<stdio.h>
+long rfact(long a,long i);
+
+int main(void)
+{
+    long a;
+RET:printf("Please enter the number you wanna !(q to quit):");
+    while (scanf("%ld",&a)!=1)
+         {
+          if (getchar()=='q')
+             {printf("Bye\n");
+              return 0;}
+          else
+          while (getchar()!='\n');
+          printf("Invalid input,plz reenter:");}
+
+printf("THE!%ld =%ld.\n",a,rfact(a,1));
+while (getchar()!='\n');
+goto RET;
+
+}
+
+long rfact(long a,long i)
+{ 
+     if  (i<=a)
+       {i++;
+        if (i==a+1)
+          return a;
+        return (i-1)*rfact(a,i);
+        }
+
+}

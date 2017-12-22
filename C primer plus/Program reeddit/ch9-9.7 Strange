@@ -1,0 +1,32 @@
+#include<stdio.h>
+long rfact(long a,long i,long n);
+
+int main(void)
+{
+    long a;
+    printf("Please enter the number you wanna !:");
+    while (scanf("%ld",&a)!=1)
+         {while (getchar()!='\n');
+          printf("Invalid input,plz reenter:");}
+
+printf("THE!%ld =%ld.\n",a,rfact(a,1,1));
+return 0;
+}
+
+long rfact(long a,long i,long n)
+{   long k;
+     n*=i;
+     i++;
+     if (i==a+1)
+        k=n;
+    if (i<=a)
+       rfact(a,i,n);
+    printf("i=%ld,n=%ld\n",i,n);    //TEST MONITOR#1
+    printf("KKKKK=%ld,%p\n",k,&k);  //TEST MONITOR#2
+    return k;
+}
+
+/* I have no idea how the last level of this recursion that can be returned one by one to (main)function. 
+After all, their locations are so different.Anyone could tell me what happened?*/
+
+    

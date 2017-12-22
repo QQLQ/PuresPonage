@@ -1,0 +1,34 @@
+#include<stdio.h>
+#include<string.h>
+#define WIDTH 40
+#define NAME "Qixin Liu"
+#define ADDRESS "Tiam ming Road"
+#define TELE "132XXXXXXX"
+
+void showchar(char ch,int n);
+
+int main(void)
+{
+  showchar('*',WIDTH);
+  printf("\n");
+  showchar(' ', (WIDTH-strlen(NAME))/2 );
+  printf("%s",NAME);
+  printf("\n");
+  showchar(' ', (WIDTH-strlen(ADDRESS))/2);
+  printf("%s",ADDRESS);
+  printf("\n");
+  showchar(' ', (WIDTH-strlen(TELE))/2);
+  printf("%s",TELE);
+  printf("\n");
+  showchar('*',WIDTH);
+ 
+  printf("\n");
+
+return 0;
+}
+
+void showchar(char ch,int n)
+{ int i;
+  for (i=1;i<=n;i++)
+    putchar(ch);
+}

@@ -1,0 +1,22 @@
+#include<stdio.h>
+int BITO(int,int);
+int main(void)
+{
+   int n;
+   printf("Please enter a number, and i am gonna make it bi:");
+   scanf("%d",&n);
+       BITO(n,n);
+printf("\nDone!\n");
+return 0;
+}
+
+int BITO(int i,int n)
+{
+    if (i!=0)
+         BITO(i/2,n);  
+    else 
+      return 1;
+printf("%d",i%2);
+if (i==n)
+   return 0;
+}

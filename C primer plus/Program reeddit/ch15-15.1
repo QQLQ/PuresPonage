@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<limits.h>
+
+char* itobs(int numb,char *snumb);
+
+int main(void)
+{ 
+  int numb;
+  char snumb[CHAR_BIT*sizeof(int)+1];
+
+while (puts("Please enter the number.(press non-number to quit)")
+             ,scanf("%d",&numb))
+ {
+  while (getchar()!='\n');
+  itobs(numb,snumb);
+
+  printf("binary:%s | decimal:%d\n",snumb,numb);
+ }
+return 0;
+}
+
+char* itobs(int numb,char *snumb)
+{
+  int i;
+  int x;
+  x=numb;
+
+ for (i=0;x>0;i++)
+     x>>=1;
+
+x=numb;
+
+snumb[i]='\0';
+
+ while (--i>=0) 
+    {
+     snumb[i]='0'+(x&1);
+     x>>=1;
+     }
+
+return snumb;
+}

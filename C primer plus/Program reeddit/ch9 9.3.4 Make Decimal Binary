@@ -1,0 +1,27 @@
+#include<stdio.h>
+void BITO(int);
+int main(void)
+{
+   int n;
+   printf("Please enter a number, and i am gonna make it bi:");
+   while (scanf("%d",&n)!=1)
+      {while (getchar()!='\n');
+       printf("Plz reenter this int:");}
+   BITO(n);
+printf("\nDone!\n");
+return 0;
+}
+
+void BITO(int i)
+{
+int a;
+    if (i!=0)
+      { a=i%2;
+        i/=2;
+        BITO(i);
+      }
+     else 
+        return;
+    printf("%d",a);
+    
+}
