@@ -1,0 +1,48 @@
+#include<stdio.h>
+#include<time.h>
+#define TEST
+int wait(double sec);
+
+int main(void)
+{
+  long i=0;
+  double sec;
+  puts("Please enter the seconds");
+  if (scanf("%lf",&sec)==1)
+    {
+  	    while ( wait(sec) )
+      {
+       i++;
+       if (i%2==0)
+          putchar('\n');
+      }
+    }
+puts("Done");
+return 0;
+}
+
+int wait(double sec)
+{
+    static int initialized=0;
+    static double initial;
+    double sum=0;
+    if (initialized==0)
+       {
+        initialized=1;
+        initial=(double)clock();
+        }    
+     sum=((double)clock()-initial)/CLOCKS_PER_SEC;
+#ifdef TEST
+printf("sum=%.3f clock=%.3f init=%.3f   |",sum,(double)clock(),initial);
+#endif
+   if (sum<sec)
+     return 1;
+   else 
+     return 0;
+}
+    //I was tring to pass a double type of argument to function "wait",which before given time tuning out will keep returning
+    //1.otherwise it returns 0 to tell that time given is out.Somehow it just does not work well---TOO SLOW,like it gives me 
+    //4.3 secs while 10 secs in realiy passed.
+    //Meanwhile,if just use it as the function to delay without printing things on screen,the time delayed for bascically 
+    //matches the real time passed.Trying to figure it why.
+    //ps.maybe i know why now---It might finished alreay, it just takes time to print on screen.I guess.

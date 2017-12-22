@@ -1,0 +1,65 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+#define SIZE 10
+
+struct name_stru{
+      char fname[21];
+      char lname[21];
+       }name[SIZE]= {
+ {"Tom","Chris"},
+ {"Bruce","Wayne"},
+ {"Cat","Dog"},
+ {"Clark","Kent"},
+ {"What","Ok"},
+ {"Fly","Tomoon"},
+ {"Best","Choice"},
+ {"Best","Buy"},
+ {"No","Yes"},
+ {"That","End"}
+           };
+
+
+int mycomp(const void*p1,const void*p2);
+void showarray(const struct name_stru*name,int size);
+
+
+
+int main(void)
+{
+
+
+ puts("Unsorted Name as following:");
+ showarray(name,SIZE); 
+ qsort(name,SIZE,sizeof(struct name_stru),mycomp);
+ puts("Sorted Name as following:");
+ showarray(name,SIZE);
+
+puts("Done");
+
+return 0;
+}
+
+
+int mycomp(const void*pt1,const void*pt2)
+{   
+    int x;
+    const struct name_stru*p1=(const struct name_stru*)pt1;
+    const struct name_stru*p2=(const struct name_stru*)pt2;
+
+ if  ((x=strcmp(p1->fname,(*p2).fname))!=0)
+     return x;
+ else if( (x=strcmp(p1->lname,(*p2).lname))!=0)
+     return x;
+ else 
+     return x;
+}
+
+void showarray(const struct name_stru*name,int size)
+{
+     int i;
+     for (i=0;i<size;i++)
+       printf("Fname:%s  Lname:%s\n",name[i].fname,name[i].lname);
+   return;
+}

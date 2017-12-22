@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<time.h>
+#define TEST
+void delay(double sec);
+
+int main(void)
+{
+  long i=0;
+  double sec;
+  puts("Please enter the seconds");
+  if (scanf("%lf",&sec)==1)
+    {
+       delay(sec);
+       puts("HI!");
+    }
+puts("Done");
+return 0;
+}
+
+void delay(double sec)
+{
+   double initial=clock();
+
+   while ( ((double)clock()-initial)/CLOCKS_PER_SEC<sec);
+#ifdef TEST
+printf("clock=%.3f init=%.3f   |",(double)clock(),initial);
+#endif
+
+     return;
+}
+    

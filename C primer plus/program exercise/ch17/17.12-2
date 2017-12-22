@@ -1,0 +1,92 @@
+#include"list.h"
+#include<stdio.h>
+#include<stdlib.h>
+#include<stdbool.h>
+
+#define MAXSIZE 15
+
+void Initialize(LIST*plist)
+{
+ plist->head=plist->end=NULL;
+return;
+}
+
+bool ListIsEmpty(LIST*plist)
+{
+ return plist->head==NULL;
+}
+
+bool ListIsFull(LIST*plist)
+{
+    NODE* pn;
+    pn=(NODE*)malloc(sizeof(NODE));
+    if (pn==NULL)
+     return true;
+    else
+     {
+      free(pn);
+      return false;
+     }
+}
+
+bool AddItem(LIST*plist,ITEM*pi)
+{
+   NODE*new_node;
+   if (ListIsFull(plist))
+    {
+     fprintf(stderr,"The list is already full\n");
+     return false;
+     }
+   new_node=(NODE*)malloc(sizeof(NODE));
+   if (new_node==NULL)
+    {
+     fprintf(stderr,"Unable to allcoate memorary.\n");
+     return false;
+    }
+    new_node->item=*pi;
+    new_node->next=NULL;
+    if (ListIsEmpty(plist))
+       plist->head=new_node;
+    else 
+       plist->end->next=new_node;
+    plist->end=new_node;
+return true;
+}
+
+int CountTheList(LIST*plist)
+{
+ NODE*temp;
+ temp=plist->head;
+ int num=0;
+ while (temp!=NULL)
+   {
+    num++;
+    temp=temp->next;
+    }
+return num;
+}
+void Traverse(LIST*plist,void (*pfun)(ITEM item))
+{
+  NODE* root;
+  root=plist->head;
+  while (root!=NULL)
+  {
+   pfun(root->item);
+   root=root->next;
+  }
+return;
+}
+
+void EmptyTheList(LIST*plist)
+{
+  NODE*temp;
+  temp=plist->head;
+  while (temp!=NULL)
+   {
+     plist->head=plist->head->next;
+     free(temp);    
+     temp=plist->head;
+    }
+return;
+}
+    

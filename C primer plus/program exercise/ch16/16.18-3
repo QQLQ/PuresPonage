@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<math.h>
+
+#define pi  (4*atan(1))
+#define rad_to_deg (180/pi)
+
+struct polar_stru{
+    double magnitude;
+    double angle;
+}polar;
+
+struct rect_stru{
+    double x;
+    double y;
+}rect;
+
+struct rect_stru func(struct polar_stru polar);
+
+
+int main(void)
+{
+  while (puts("Please enter the mag and angle(in degree):"),
+         scanf("%lf %lf",&polar.magnitude,&polar.angle) )
+      {
+        while (getchar()!='\n');
+        rect=func(polar);
+        printf("x=%f,y=%f\n",rect.x,rect.y);
+     }
+
+puts("Done!");
+return 0;
+}
+   
+struct rect_stru func(struct polar_stru polar) //Using the same name of two varibles in overlap scope is not very good.Unless you are very sure what they mean and you only use them for once.
+{
+ struct rect_stru rect;
+    rect.y= polar.magnitude*sin(polar.angle/rad_to_deg);   
+    rect.x= polar.magnitude*cos(polar.angle/rad_to_deg);
+return rect;
+}

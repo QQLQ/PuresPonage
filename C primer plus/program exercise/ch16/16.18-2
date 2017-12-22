@@ -1,0 +1,11 @@
+#include<stdio.h>
+#define Harmonic(X,Y) (1/((1/(X)+1/(Y))/2))
+
+int main(void)
+{
+   double x,y;
+  
+   printf("res=%f\n",Harmonic(3.0,4.0));
+  
+return 0;
+}

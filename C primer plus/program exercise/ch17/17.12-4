@@ -1,0 +1,125 @@
+#include"queue.h"
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#define MIN_PER_HOUR 60.0    //Remember this must be double,so must be 60.0 instead of 60
+
+bool newcustomer(double x);
+ITEM customertime(long when); 
+
+int main(void)
+{
+  QUEUE line1,line2;
+  ITEM temp;
+  int hours;
+  int perhour;
+  long cycle,cyclelimit;
+  double min_per_cust;
+
+  long turnaways_1=0;
+  long customers_1=0;
+  long served_1=0;
+  long sum_line_1=0;
+  int wait_time_1=0;
+  long line_wait_1=0;
+
+  long turnaways_2=0;
+  long customers_2=0;
+  long served_2=0;
+  long sum_line_2=0;
+  int wait_time_2=0;
+  long line_wait_2=0;
+
+  Initialize(&line1);
+  Initialize(&line2);
+  srand((unsigned int)time(0));
+  puts("Case study.");
+  puts("Enter the number of stimulation hours.");
+  scanf("%d",&hours);
+  cyclelimit=hours*MIN_PER_HOUR;
+  puts("Enter the average number of customer per hour.");
+  scanf("%d",&perhour);
+  min_per_cust=MIN_PER_HOUR/perhour;     //Or you will get a rough int.Then everything go burn.
+  for (cycle=0;cycle<cyclelimit;cycle++){
+
+  if (newcustomer(min_per_cust))
+   {
+     if (QueueIsFull(&line1))
+        turnaways_1++;
+     else 
+     {
+      customers_1++;
+      temp=customertime(cycle);
+      AddItem(&line1,temp);
+     }
+   }
+ 
+  if (wait_time_1<=0&& !QueueIsEmpty(&line1)){
+   DeleteTheQueue(&line1,&temp);
+   wait_time_1=temp.processtime;
+   line_wait_1+=cycle-temp.arrive;
+   served_1++;
+   }
+  if (wait_time_1>0)
+   wait_time_1--;
+  sum_line_1+=QueueItemCount(&line1);  
+
+
+
+  if (newcustomer(min_per_cust))
+   {
+     if (QueueIsFull(&line2))
+        turnaways_2++;
+     else 
+     {
+      customers_2++;
+      temp=customertime(cycle);
+      AddItem(&line2,temp);
+     }
+   }
+ 
+  if (wait_time_2<=0&& !QueueIsEmpty(&line2)){
+   DeleteTheQueue(&line2,&temp);
+   wait_time_2=temp.processtime;
+   line_wait_2+=cycle-temp.arrive;
+   served_2++;
+   }
+  if (wait_time_2>0)
+   wait_time_2--;
+  sum_line_2+=QueueItemCount(&line2);  
+
+}
+
+if (customers_1>0||customers_2>0)
+ {
+  printf("custmoer accepted_1:%ld  custmoer accepted_2:%ld\n",customers_1,customers_2);
+  printf(" customers served_1:%ld  customers served_2 :%ld\n",   served_1,served_2);
+  printf("        turnaways_1:%ld  turnaways_2:%ld\n",turnaways_1,turnaways_2);
+  printf("Average Queuesize_1:%.2f Average Queuesize_2:%.2f\n",
+        (double)sum_line_1/cyclelimit,(double)sum_line_2/cyclelimit);
+  printf("Average wait time_1:%.2f Average wait time_2:%.2f\n",
+(double)line_wait_1/served_1,(double)line_wait_2/served_2);
+  }
+else
+  puts("No customers!");
+EmptyTheQueue(&line1);
+EmptyTheQueue(&line2);
+puts("Bye!");
+
+return 0;
+}
+
+bool newcustomer(double x){
+  if ( rand()*x/RAND_MAX<1 )
+    return true;
+  else 
+    return false;
+}
+
+ITEM customertime(long when)
+{
+   ITEM temp;
+   temp.arrive=when;
+   temp.processtime=rand()%3+1;
+return temp;
+} 

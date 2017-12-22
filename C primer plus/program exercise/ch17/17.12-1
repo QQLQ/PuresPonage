@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define TSIZE 45
+
+typedef struct film{
+   char name[TSIZE];
+   int rating;
+   struct film* next;
+      }FILM;
+
+char* sgets(char* line,int size);
+void showmovie_1(FILM*root);    //recursion version.
+
+int main(void)
+{ 
+ FILM* head=NULL;
+ FILM* prev,*current;
+ char input[TSIZE]; 
+ 
+
+ puts("Enter first movide title");
+ while (sgets(input,TSIZE)!=NULL&&input[0]!='\0')
+  {
+   current=(FILM*)malloc(sizeof(FILM));
+   if (current==NULL)
+    {
+     fprintf(stderr,"Error allocating memorary.\n");
+     exit(EXIT_FAILURE);
+    }
+   current->next=NULL;
+   strcpy(current->name,input);
+   printf("Now enter rating for %s.\n",current->name);
+   while (scanf("%d",&current->rating)!=1)
+     {
+      while (getchar()!='\n');
+      puts("Please reenter.");
+     }
+    while (getchar()!='\n');
+    if (head==NULL)
+      head=current;
+    else 
+      prev->next=current;
+    prev=current;
+    puts("Please enter next name.");
+  }
+
+showmovie_1(head);
+
+return 0;
+}
+
+char* sgets(char* line,int size)
+{
+   char *pt,*find;
+   pt=fgets(line,size,stdin);
+
+   if (pt)
+    {
+      find=strchr(line,'\n');
+      if (find)
+          *find='\0';
+      else 
+         while (getchar()!='\n');
+    }
+return pt;
+}
+
+void showmovie_1(FILM*root)
+{
+   if (root!=NULL)
+    {
+     showmovie_1(root->next);
+     printf("movie:%s rating:%d\n",root->name,root->rating);
+    }
+return;
+}
+

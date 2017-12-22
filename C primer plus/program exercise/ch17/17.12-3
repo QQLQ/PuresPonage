@@ -1,0 +1,54 @@
+#include"list.h"
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<stdbool.h>
+
+void Initialize(LIST*plist)
+{
+  plist->items=0;
+}
+
+bool ListIsEmpty(LIST*plist)
+{
+ return plist->items==0;
+}
+
+bool ListIsFull(LIST*plist)
+{
+  return plist->items==MAXSIZE;
+}
+
+bool AddItem(LIST*plist,ITEM*pi)
+{
+   if (ListIsFull(plist))
+    {
+     fprintf(stderr,"The list is already full\n");
+     return false;
+     }
+   strcpy(plist->entries[plist->items].name,pi->name);
+   plist->entries[plist->items].rating=pi->rating;
+plist->items++;
+
+return true;
+}
+
+int CountTheList(LIST*plist)
+{
+return plist->items;
+}
+
+void Traverse(LIST*plist,void (*pfun)(ITEM item))
+{
+   int i;
+   for (i=0;i<plist->items;i++)
+     pfun(plist->entries[i]);
+return;
+}
+
+void EmptyTheList(LIST*plist)
+{
+   plist->items=0;
+return;
+}
+    

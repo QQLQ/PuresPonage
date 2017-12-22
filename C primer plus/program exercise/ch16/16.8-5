@@ -1,0 +1,71 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#define TEST       //delete this line to disable the test part
+#define SIZE 100
+
+void random_print(int*ar,int size,int times);
+int random_my(const void*p1,const void*p2);
+
+int main(void)
+{
+  int ar[SIZE];
+  int times;
+
+  for (int i=0;i<SIZE;i++)
+    ar[i]=i+1;
+
+#ifdef TEST                                   //test part 1
+puts("ARRAY LIST:");
+  for (int i=0;i<SIZE;i++)
+   printf("No.%d number:%d\n",i+1,ar[i]); 
+#endif                                        //test part 1
+ 
+  while (puts("Please tell me how many times you wanna draw?"),
+         scanf("%d",&times)==1)
+  {
+    while (getchar()!='\n');
+    random_print(ar,SIZE,times);
+  }
+
+puts("DONE");
+
+return 0;
+}
+
+void random_print(int*ar,int size,int times)
+{   
+   int line[size];
+   int i;
+
+  if (times==0)
+    {
+     printf("The size must be bigger than 0.\n");
+     return;
+    }  
+
+  for (i=0;i<size;i++)
+    line[i]=i;
+  qsort(line,size,sizeof(int),random_my);
+   
+  for (i=0;i<times;i++)
+   {  
+    if (i==0)
+      printf("Random draw:\n");
+   printf("No.%d number:%d\n",i+1,ar[line[i]] );
+   }
+return ;
+}
+
+int random_my(const void*p1,const void*p2)
+{
+      static int i=0;
+ 
+      srand( (unsigned int)time(NULL)+ (i++) );
+      if (rand()%2==0)
+        return 1;
+      else
+       return -1;
+}
+     
+        
