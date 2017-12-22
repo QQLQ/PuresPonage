@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<ctype.h>
+int TEST(char);
+int main(void)
+{
+    char ch;
+
+    while ((ch=getchar())!=EOF)
+         {printf("%d",TEST(ch));
+          putchar('|');}
+
+printf("Done\n");
+return 0;
+        
+}
+
+int TEST(char ch)
+{
+  if (isalpha(ch))
+    {ch=tolower(ch);
+     putchar(ch);
+     return (int)ch+1-(int)'a';}
+  else 
+     {printf("%c",ch);
+     return -1;}
+}
+    

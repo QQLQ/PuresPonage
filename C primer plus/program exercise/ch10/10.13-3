@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<limits.h>
+int retbig(int,int []);
+int main(void)
+{
+    
+
+    int AR[5]={ 122, 33, 23,  12,  1};
+         
+    printf("MAX num=%d\n",retbig(5,AR) );
+return 0;
+}
+
+int retbig(int n,int *ar)
+{    int x,i;
+     i=INT_MIN;
+
+    for  (x=0;x<n;x++)
+      if (ar[x]>i)
+              i=ar[x];   
+
+return i;                          
+}
+
+    
+
+

@@ -1,0 +1,36 @@
+#include<stdio.h>
+#define ROWS 7
+#define COLS 3 
+void copy_ptr(int *,int *,int);
+void print(int *,int);
+
+int main(void)
+{    
+    int AR[ROWS];
+copy_ptr(AR,(int [ROWS]){[2]=4,5,6},ROWS);
+
+print(AR,ROWS);
+
+printf("\nDONE!\n");
+return 0;
+       
+}
+
+void copy_ptr(int *tar,int ar[],int rows)
+{
+    int r,c;
+
+    for (r=0;r<rows;r++)
+            *(tar+r)=*(ar+r);
+
+return;
+}
+
+void print(int *ar,int rows)
+{
+int r;
+    for (r=0;r<rows;r++)
+            printf("%d|",ar[r]);
+
+return;
+}

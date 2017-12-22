@@ -1,0 +1,78 @@
+/*save as func.c*/
+#include<stdio.h>
+#include "liu.h"
+
+int main(void)
+{ int x;
+  int MIN,MAX;
+   MIN=1,MAX=4;
+
+RET:TOPENTER();
+    x=TEST(MIN,MAX);
+
+switch (x)
+    {case 1: printf("COPY FILES.\n");goto RET;
+     case 2: printf("MOVE FILES.\n");goto RET;
+     case 3: printf("REMOVE FILES\n");goto RET;
+     case 4: printf("BYE!\n");return 0;
+     }
+
+
+	
+return 0;
+}
+
+/*save as liu.h*/
+#define W_1 "Please choose from the following:\n"
+
+void getstars(void);
+//This is to print some '*' for decoration.
+
+void TOPENTER(void);
+//This is to ptint the menu.
+
+int TEST(int,int); 
+//These two fp in typr of int stand for the min and max. 
+
+
+/*save as getstars.c*/
+  #include<stdio.h>
+#include"liu.h"
+
+void getstars(void)
+{ 
+int i;
+  for (i=1;i<45;i++)
+    putchar('*');
+  putchar('\n');
+return;
+}
+
+/*save as TOPENTER.c*/
+#include<stdio.h>
+#include"liu.h"
+void TOPENTER(void)
+{
+   getstars();
+   printf("%s",W_1);
+   printf("1)copy files    2)move files\n");
+   printf("3)remove files  4)quit\n");
+   getstars();
+   printf("Please enter your choice:\n");
+}
+
+/*save as TEST.c*/
+#include<stdio.h>
+#include"liu.h"
+int TEST(int MIN,int MAX)
+{ 
+int x,status;  
+   while ( (status=scanf("%d",&x))!=1 || !(x>=MIN&&x<=MAX) ) 
+        {  if (status!=1)
+            {scanf("%*s");
+             return 4;}
+         printf("Your choice is not on the menu.\n");
+         TOPENTER();
+        }
+return x;
+}

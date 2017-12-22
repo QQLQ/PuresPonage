@@ -1,0 +1,50 @@
+#include<stdio.h>
+#define ROWS 4
+void DEAL(int [],int *,int *ar3,int);
+void print(int *,int);
+int main(void)
+{   int AR1[ROWS]={2,4,5,8};
+    int AR2[ROWS]={1,0,4,6};
+    int AR3[ROWS];
+
+printf("AR1:\n");
+print(AR1,ROWS);
+
+printf("AR2:\n");
+print(AR2,ROWS);
+
+printf("AR3:\n");
+print(AR3,ROWS);
+printf("AR3 are not initialized yet,so they are a mess now.\n");
+DEAL(AR1,AR2,AR3,ROWS);
+
+printf("\nAFTER: AR1:\n");
+print(AR1,ROWS);
+
+printf("AFTER: AR2:\n");
+print(AR2,ROWS);
+
+printf("AFTER: AR3:\n");
+print(AR3,ROWS);
+
+
+printf("\nDONE!\n");
+
+return 0;
+}
+
+
+void DEAL(int ar1[],int *ar2,int *ar3,int rows)
+{  int r;
+   for (r=0;r<rows;r++)
+      ar3[r]= *(ar1+r)+ar2[r];
+return;
+}
+
+void print(int *ar,int rows)
+{  int r;
+   for (r=0;r<rows;r++)
+     printf("%3d|",ar[r]);
+printf("\n");
+return;
+}

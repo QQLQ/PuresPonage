@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<limits.h>
+#define ROWS 4
+#define COLS 5
+int retbig(int,int,int (*)[*]);
+int main(void)
+{
+    
+
+    int AR[ROWS][COLS]={
+          { 22, 33, 23,  12,  1},
+          { 34,  1,  2,   3,  4},
+          {  2, 31,  0, 322,  2},
+          {  1,  2,  3,   4,  5}};
+
+    printf("MAX num=%d\n",retbig(ROWS,COLS,AR) );
+return 0;
+}
+
+int retbig(int rows,int cols,int ar[][rows])
+{    int x,y,i;
+     i=INT_MIN;
+
+    for  (x=0;x<rows;x++)
+       for  (y=0;y<cols;y++)
+          {if (ar[x][y]>i)
+              i=ar[x][y];   }
+
+return i;                          
+}
+/*Seriously do not try initializing the Variable-length array by putting numbers inside like this. You cant initialize in declaritions.*/

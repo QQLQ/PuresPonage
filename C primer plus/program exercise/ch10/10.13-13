@@ -1,0 +1,102 @@
+#include<stdio.h>
+#include<float.h>
+#define ROWS 3
+#define COLS 5
+void scan(double (*)[*],int);        //a. scanf to initialize thr ar
+double cal(int,int,double (*)[*]);   //b. compute the average of every row
+double aver(double (*)[*],int);      //c. compute the average of total
+double findmax(double (*)[*],int);   //d. find thr max number of the whole ar
+void print(double (*)[*],int);       //e. ptint all thr number is ar
+
+int main(void)
+{     double average,max;
+      double AR[ROWS][COLS];
+scan(AR,ROWS);                        //a. scanf to initialize thr ar
+
+printf("The array you entered:\n");   //OUTPUT TO REVIEW
+print(AR,ROWS);                       //e. ptint all thr number is ar
+
+putchar('\n');
+
+cal(ROWS-1,COLS-1,AR);                //b. compute the average of every row
+
+average=aver(AR,ROWS);                //c. compute the average of total
+max=findmax(AR,ROWS);                 //d. find thr max number of the whole ar
+
+printf("\n\nThe average of toal is %g amd the max is %g\n",average,max);
+
+printf("\nDONE!\n");
+return 0;
+}
+void scan(double (*ar)[COLS],int rows)
+{   int r,c;
+    for (r=0;r<rows;r++)
+        for (c=0;c<COLS;c++)
+           {printf("Plase input the numbers to AR[%d][%d]",r,c);
+            scanf("%lf",&ar[r][c]);}
+
+printf("Cong, INPUT DONE!\n");
+return;
+}
+                
+double cal(int r,int c,double (*ar)[COLS])
+{   
+    double total=0;
+    double aver=0;
+
+    if (r>0)
+     {  
+       while (c>=0)
+         {
+          total+=ar[r][c];
+          c--;}
+      aver=total/COLS;
+        
+      printf("r=%d aver=%3g\n",r,cal(r-1,COLS-1,ar));
+
+       if (r==ROWS-1)
+          printf("r=%d aver=%3g\n",r+1,aver);
+          }  
+    else       
+       {while (c>=0)
+          {
+           total+=ar[r][c];
+           c--;}
+              aver=total/COLS;
+        return aver;    
+       } 
+
+      return aver;
+}
+
+double aver(double (*ar)[COLS],int rows)
+{   int r,c;
+    double total=0;
+    double aver;
+    for (r=0;r<rows;r++)
+        for (c=0;c<COLS;c++) 
+          total+=ar[r][c];
+aver=total/(ROWS*COLS);
+return aver;
+}
+
+
+double findmax(double (*ar)[COLS],int rows)
+{   int r,c;
+    double max=FLT_MIN_10_EXP;
+    for (r=0;r<rows;r++)
+        for (c=0;c<COLS;c++) 
+           if (max<ar[r][c])
+               max=ar[r][c];
+return max;
+}
+
+void print(double (*ar)[COLS],int rows)
+{   int r,c;
+    for (r=0;r<rows;r++)
+      {putchar('\n');
+        for (c=0;c<COLS;c++)
+           printf("%5g|",ar[r][c]);
+      }
+return;
+}

@@ -1,0 +1,61 @@
+#include<stdio.h>
+#define MONTHS 12
+#define YEARS 5
+float cal_tot(const float [][*],int);
+void cal_aveyear(const float [][*],int);
+void cal_avemon(const float [][*],int);
+
+int main(void)
+{
+	const float rain[YEARS][MONTHS] =
+	{
+		{4.3,4.3,4.3,3.0,2.0,1.2,0.2,0.2,0.4,2.4,3.5,6.6},
+		{8.5,8.2,1.2,1.6,2.4,0.0,5.2,0.9,0.3,0.9,1.4,7.3},
+		{9.1,8.5,6.7,4.3,2.1,0.8,0.2,0.2,1.1,2.3,6.1,8.4},
+		{7.2,9.9,8.4,3.3,1.2,0.8,0.4,0.0,0.6,1.7,4.3,6.2},
+		{7.6,5.6,3.8,2.8,3.8,0.2,0.0,0.0,0.0,1.3,2.6,5.2}
+	};
+
+printf("YEAR    rainfall (inches)\n");
+cal_aveyear(rain,YEARS);
+
+printf("\nThe yearly average is %.1f inches.\n",cal_tot(rain,YEARS)/YEARS);
+
+printf("\nMonthly averages:\n");
+
+printf("\n JAN  FEB  MAR  APR  MAY  JUN  JUL  AUG  SEP  OCT  NOV  DEC\n");
+cal_avemon(rain,YEARS);
+
+printf("\nDONE!\n");
+return 0;
+}
+
+float cal_tot(const float ar[][MONTHS],int years)
+{  int m,y;
+   float total=0;
+     for (y=0;y<years;y++)
+        for(m=0;m<MONTHS;m++)
+          total+=ar[y][m];
+return total;
+}
+void cal_aveyear(const float ar[][MONTHS],int years)
+{  int m,y;
+   float total=0;
+     for (y=0;y<years;y++)
+       { for(m=0,total=0;m<MONTHS;m++)
+         total+=ar[y][m];
+         printf("%d  %.1f\n",2010+y,total); 
+       }
+return;
+}
+
+void cal_avemon(const float ar[][MONTHS],int years)
+{  int m,y;
+   float total=0;
+     for(m=0;m<MONTHS;m++)
+         {for (y=0,total=0;y<years;y++)     
+             total+=ar[y][m];
+             printf("%4.1f ",total/(float)years);
+         }
+return;
+}

@@ -1,0 +1,25 @@
+#include<stdio.h>
+void to_base_n(int,int);
+int main(void)
+{   int n,i,status;
+  printf("Please enter two numbers(both should be >=2 && <=10)");
+
+  while ((status=scanf("%d %d",&n,&i))!=2||!(n>1&&n<11)||!(i>1&&i<11) )
+      { printf("Invalid input,reenter plz:");
+        if (status<2)
+          { scanf("%*s");
+             if (status<1)
+               scanf("%*s");}
+       }
+printf("n=%d i=%d\n",n,i);
+to_base_n(n,i);
+
+printf("\n Done!\n");
+}            
+
+void to_base_n(int n,int i) 
+{
+        if (n>=i)
+           to_base_n(n/i,i);
+printf("%d",n%i);
+ }

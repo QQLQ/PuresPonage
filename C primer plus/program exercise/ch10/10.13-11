@@ -1,0 +1,44 @@
+#include<stdio.h>
+#define ROWS 3
+#define COLS 5
+void func(int (*)[*],int);
+void print(int (*)[*],int);
+
+int main(void)
+{    int AR[ROWS][COLS]={
+        {2,4,76,232,12},    
+        {12,24,736,2132,102},
+        {0,3,2,1,56}
+          };
+printf("ORIGINAL AR:");
+print(AR,ROWS);
+putchar('\n');
+func(AR,ROWS);
+printf("X2 AR:");
+print(AR,ROWS);
+
+printf("\nDONE!\n");
+return 0;
+}
+
+
+void func(int ar[][COLS],int rows)
+{   int r,c;
+
+    for (r=0;r<rows;r++)
+       for (c=0;c<COLS;c++)
+         ar[r][c]*=2;
+
+return;
+}
+
+void print(int (*ar)[COLS],int rows)
+{   int r,c;
+
+    for (r=0;r<rows;r++)
+      {putchar('\n');
+       for (c=0;c<COLS;c++)
+          printf("%4d|",ar[r][c]);
+      }
+return;
+}

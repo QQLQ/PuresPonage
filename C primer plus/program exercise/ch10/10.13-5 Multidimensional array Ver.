@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<float.h>
+#define ROWS 4
+#define COLS 5
+
+double func(int rows,int*pxr,int*pxc,int*pnr,int*pnc,double ar[][COLS]);
+
+int main(void)
+{
+    int *pxr,    *pxc,    *pnr,    *pnc;
+    int  xr,      xc,      nr,      nc;
+         pxr=&nr, pxc=&xc, pnr=&nr, pnc=&nc;
+    double answer,max,min;
+    double AR[ROWS][COLS]={
+          { 22, 33.3, 23,    12,  1},
+          { 34,  1.2,  2,     3,  4},
+          {  2, 31.4,0.4, 322.7,  2},
+          {  1,    2,  3,     4,  5}
+                                   };
+
+answer=func(ROWS,pxr,pxc,pnr,pnc,AR);
+max=AR[*pxr][*pxc],min=AR[*pnr][*pnc];
+printf("The max %g minus the min %g is %g\n",max,min,answer); 
+
+
+
+return 0;
+}
+
+double func(int rows,int*pxr,int*pxc,int*pnr,int*pnc,double ar[][COLS])
+{  int  r,c,mr,mc;
+   double min,max;
+min=FLT_MAX_10_EXP;
+max=FLT_MIN_10_EXP;
+
+for (r=0;r<rows;r++)
+  for (c=0;c<COLS;c++)
+     {if (min>ar[r][c])
+         {min=ar[r][c];
+          *pnr=r;
+          *pnc=c;}
+
+      if (max<ar[r][c])
+         {max=ar[r][c];
+          *pxr=r;
+          *pxc=c;}
+
+       }
+
+
+return max-min;
+}

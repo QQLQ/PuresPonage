@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<float.h>
+#define ROWS 4
+#define COLS 5
+double ret_index(int,int,int*,int *,double [][*]);
+int main(void)
+{     double AR[ROWS][COLS]={
+          { 22, 33.3, 23,  12,  1},
+          { 34,  1.2,  2,   3,  4},
+          {  2, 31.4,  0, 322.7,  2},
+          {  1,  2,  3,   4,  5}};
+double I;
+int R,C;
+int *pr,*pc;
+pr=&R,pc=&C;
+
+I=ret_index(ROWS,COLS,pr,pc,AR);
+printf("The index of the biggest number is AR[%d][%d],which is %g",R,C,I);
+putchar('\n');
+
+return 0;
+}
+
+double ret_index(int rows,int cols,int*pr,int*pc,double ar[][cols])
+{
+   int r,c;
+   double i=FLT_MIN_10_EXP;
+
+    for (r=0;r<rows;r++)
+          for (c=0;c<cols;c++)
+               if (i<ar[r][c])
+                  {i=ar[r][c];
+                        *pr=r;
+                        *pc=c; 
+                         }
+
+return i;
+}

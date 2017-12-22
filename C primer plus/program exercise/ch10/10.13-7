@@ -1,0 +1,48 @@
+#include<stdio.h>
+#define ROWS 4
+#define COLS 5
+
+void copy_arr(double (*)[*],double (*)[*],int);
+void print(double [][*],int);
+
+int main(void)
+{
+    double AR[ROWS][COLS]={
+          { 22, 33.3, 23,    12,  1},
+          { 34,  1.2,  2,     3,  4},
+          {  2, 31.4,0.4, 322.7,  2},
+          {  1,    2,  3,     4,  5}
+                           };
+
+   double TARGET[ROWS][COLS];
+
+   copy_arr(TARGET,AR,ROWS);
+   printf("THIS IS AR:\n");
+   print(AR,ROWS);
+   printf("\nTHIS is TARGET:\n");
+   print(TARGET,ROWS);
+
+printf("\nDONE!\n");
+return 0;
+}
+
+void copy_arr(double tar[][COLS],double (*ar)[COLS],int rows)
+{  int r,c;
+     
+   for (r=0;r<rows;r++)
+       { putchar('\n');
+         for (c=0;c<COLS;c++)
+            tar[r][c]=ar[r][c];
+      }
+return;
+}
+void print(double ar[][COLS],int rows)
+{  int r,c;
+     
+   for (r=0;r<rows;r++)
+       { putchar('\n');
+         for (c=0;c<COLS;c++)
+               printf("%5g|",ar[r][c]);
+       }
+return;
+}

@@ -1,0 +1,70 @@
+#include<stdio.h>
+#define SIZE 5
+void copy_arr(double *,double [],int);
+void copy_ptr(double *,double [],int);
+void copy_ptrs(double *,double [],double []);
+void printar(double*,int);
+
+int main(void)
+{
+   double target1[SIZE];
+   double target2[SIZE];
+   double target3[SIZE];
+   double source[SIZE]={1.1,2.2,3.3,4.4,5.5};
+
+copy_arr(target1,source,SIZE);
+copy_ptr(target2,source,SIZE);
+copy_ptrs(target3,source,source+SIZE);
+printf("Psource=%p\n",&source);
+
+printar(target1,SIZE);
+printar(target2,SIZE);
+printar(target3,SIZE);
+
+return 0;
+}
+
+
+void copy_arr(double *ar,double AR[],int n)
+{
+    int i;
+ 
+   for (i=0;i<n;i++)
+        ar[i]=AR[i];
+return;
+}
+
+
+void copy_ptr(double *ar,double AR[],int n)
+{
+    int i;
+    for (i=0;i<n;i++)
+     *(ar++)=*(AR++);  
+
+
+return;
+}
+
+
+void copy_ptrs(double *ar,double AR[],double AR5[])
+{printf("ARf=%p\n",&AR);
+
+   for (;AR<AR5;AR++)
+     *(ar++)=*AR; 
+return;
+}
+
+
+void printar(double *ar,int n)
+{
+     int i;
+for (i=0;i<n;i++)
+     printf("%5g",ar[i]);
+printf("\n");
+return;
+}     
+
+
+
+
+
