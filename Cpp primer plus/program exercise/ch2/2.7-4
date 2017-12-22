@@ -1,0 +1,11 @@
+#include<iostream>
+
+int main(void)
+{
+  using namespace std;
+  std::cout<<"Enter your age:";  //std::cout is only for test.Wanna know what will happen.
+  int age;
+  cin>>age;
+  cout<<age*12<<" Months in total."<<endl;
+  return 0;
+}  

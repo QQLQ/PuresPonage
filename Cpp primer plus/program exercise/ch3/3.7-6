@@ -1,0 +1,14 @@
+#include<iostream>
+
+int main(void)
+{
+  using namespace std;
+  double dist_km;
+  double fuel_lit;
+  cout<<"Enter distance in km: ";
+  cin>>dist_km;
+  cout<<"Enter fuel consumption in fuel lit: ";
+  cin>>fuel_lit;
+  cout<<"Result: "<<fuel_lit/dist_km*100<<endl;
+  return 0;
+}

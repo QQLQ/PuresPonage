@@ -1,0 +1,20 @@
+#include<iostream>
+
+double conv(int dist);
+
+int main(void)
+{
+  using namespace std;
+  
+  cout<<"Enter your long"<<endl;
+  int dist;
+  cin>>dist;
+  cout<<"The long is "<<conv(dist)<<" yards"<<endl;
+  
+  return 0;
+}
+
+double conv(int dist)
+{
+  return dist/220.0;   //Do not forget this. You need float instead of int.
+}

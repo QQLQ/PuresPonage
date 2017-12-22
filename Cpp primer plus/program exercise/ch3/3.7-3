@@ -1,0 +1,26 @@
+#include<iostream>
+
+int main(void)
+{
+  using namespace std; 
+  
+  int degree;
+  int minute;
+  int second;
+  
+  const double degree_to_minute{60};    //Only for c++11.so you need g++ [filename] -std=c++11
+  const double minute_to_second{60};
+  
+  cout<<"Please enter degree: ";
+  cin>>degree;
+  cout<<"Please enter minute: ";
+  cin>>minute;
+  cout<<"Please enter second: ";
+  cin>>second;
+  cout<<degree<<" degrees, "
+      <<minute<<" minutes, "
+      <<second<<" seconds = "
+      <<(second/minute_to_second+minute)/degree_to_minute+degree
+      <<" degrees"<<endl;
+  return 0;
+}

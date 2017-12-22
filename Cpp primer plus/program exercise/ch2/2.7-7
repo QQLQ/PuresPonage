@@ -1,0 +1,23 @@
+#include<iostream>
+
+void print(float hours,float mins);
+
+int main(void)
+{
+ using namespace std;
+ cout<<"Enter the number of houts: ";
+ float hours;
+ cin>>hours;
+ cout<<"Enter the number of minutes: ";
+ float mins;
+ cin>>mins;
+ print(hours,mins);
+ return 0;
+}
+
+void print(float hours,float mins)
+{
+  using namespace std;
+  cout<<"Time: "<<hours<<":"<<mins<<endl;
+  return;
+}

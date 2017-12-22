@@ -1,0 +1,26 @@
+#include<iostream>
+
+void str1(void);
+void str2(void);
+
+int main(void)
+{
+  str1();
+  str1();
+  str2();
+  str2();
+  return 0;
+}
+
+void str1(void)
+{
+  std::cout<<"Three lind mice"<<std::endl;
+  return;
+}
+
+void str2(void)
+{
+  using std::cout;
+  cout<<"See how they run\n";
+  return;
+}

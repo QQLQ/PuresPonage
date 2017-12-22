@@ -1,0 +1,13 @@
+#include<iostream>
+
+int main(void)
+{
+   using namespace std;
+   int int_height_inch;
+   cout<<"Enter your height in inch."<<endl;
+   cin>>int_height_inch;
+   cout<<"Your height is: ";
+   cout<<int_height_inch/12<<" Feet "<<int_height_inch%12<<" inch"<<endl;
+   return 0;
+}
+   

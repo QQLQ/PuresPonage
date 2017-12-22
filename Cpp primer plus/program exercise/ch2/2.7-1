@@ -1,0 +1,10 @@
+#include<iostream>
+
+int main(void)
+{
+  using namespace std;
+  
+  cout<<"I am Mr Mega and i live in basement."<<endl;
+  
+  return 0;
+}

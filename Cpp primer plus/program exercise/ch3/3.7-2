@@ -1,0 +1,24 @@
+#include<iostream>
+
+int main(void)
+{
+  using namespace std;
+
+  const int feet_to_inch=12;
+  const double inch_to_m=2.54/100;
+  const double kg_to_pound=2.2;
+  
+  int left_int_feet;
+  int right_int_inch;
+  float pound_weight;
+
+  cout<<"Please enter your height in feet and inch"<<endl;
+  cin>>left_int_feet>>right_int_inch;
+  float m_height=(left_int_feet*feet_to_inch+right_int_inch)*inch_to_m;
+  cout<<"Please enter your weight in pounds"<<endl;
+  cin>> pound_weight;
+  double kg_weight=pound_weight/kg_to_pound;
+  cout<<"Your BMI is "<<kg_weight/(m_height*m_height)<<endl;
+  
+  return 0;
+}

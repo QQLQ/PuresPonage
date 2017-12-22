@@ -1,0 +1,18 @@
+#include<iostream>
+
+float conv(float cel);
+
+int main(void)
+{
+   using namespace std;
+   cout<<"please enter a Celsius value:";
+   double cel;
+   cin>>cel;
+   cout<<cel<<"degress Celsius is "<<conv(cel)<<" degrees Fahrenheit."<<endl;
+   return 0;
+}
+
+float conv(float cel)
+{
+   return 32+(cel*1.8);
+}

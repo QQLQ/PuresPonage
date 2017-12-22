@@ -1,0 +1,12 @@
+#include<iostream>
+
+int main(void)
+{
+  using namespace std;
+  double EU_style;
+  const double CONV=3.875*62.14;
+  cout<<"Enter in EU style: ";
+  cin>>EU_style;
+  cout<<"Res: "<<1/(EU_style/CONV);
+  return 0;
+}

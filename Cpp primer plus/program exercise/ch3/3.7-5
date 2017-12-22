@@ -1,0 +1,15 @@
+#include<iostream>
+
+int main(void)
+{
+  using namespace std;
+  long long USA_pop;
+  long long ww_pop;
+  cout<<"Enter the world's population: ";
+  cin>>ww_pop;
+  cout<<"Enter the population of US: ";
+  cin>>USA_pop;
+  cout<<"The population of the US is "<<(long double)USA_pop/ww_pop*100
+      <<"%% of the world population.\n";
+  return 0;
+}

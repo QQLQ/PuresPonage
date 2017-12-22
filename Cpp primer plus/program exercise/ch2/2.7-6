@@ -1,0 +1,18 @@
+#include<iostream>
+
+float conv(float ly);
+
+int main(void)
+{
+  using namespace std;
+  cout<<"Enter the number of light year:";
+  float ly;
+  cin>>ly;
+  cout<<ly<<" light years = "<<conv(ly)<<" astronomical units"<<endl;
+  return 0;
+}
+
+float conv(float ly)
+{
+   return ly*63240;
+}
