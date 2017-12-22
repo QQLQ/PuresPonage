@@ -1,0 +1,37 @@
+#include<stdio.h>
+#define MAXSN 10
+#define MAXNA 20
+#define ARNUM 5
+
+ struct memb {
+          char socn[MAXSN];
+          struct {char fname[MAXNA];char mname[MAXNA];char lname[MAXNA];};
+          };
+
+void print(struct memb *members,int arnum);
+
+int main(void)
+{
+  struct memb members[ARNUM]=
+                {
+          {"302039823",{"Dribble","M","Flossie"}},
+          {"148964131",{"Albert","","Wesker"}},
+          {"730411590",{"Liquid","","Snake"}},
+          {"561545644",{"Leon","Scott","Kennedy"}},
+          {"484784343",{"Dennis","MacAlistair","Ritchie"}}
+                };
+
+  
+  print(members,ARNUM);
+
+puts("DONE!");
+return 0;
+}
+
+void print(struct memb *members,int arnum)
+{
+ for (int i=0;i<arnum;i++)
+    printf("%s,%s %s%c---%s\n",members[i].fname,members[i].lname,members[i].mname,members[i].mname[0]=='\0'?'\0':'.',members[i].socn);
+ 
+ return;
+}

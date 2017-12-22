@@ -1,0 +1,64 @@
+#include<stdio.h>
+
+int rotate(int num,int left);
+char* itob(int num,char *line);
+
+int main(void)
+{
+  int num,left;
+  char line[33];
+  printf("Please entert a number and the number you wanna rotate to left(q to quit):");
+  if (scanf("%d %d",&num,&left)==2)
+  {
+   printf("Rotaed number of %d is %d.\n",num,rotate(num,left));
+   printf("(In bin{numb:%s,",itob(num,line));
+   printf("rotated numb:%s}),",itob(rotate(num,left),line) );
+  }
+
+return 0;
+}
+
+int rotate(int num,int left)
+{
+  int bits_total=0;
+  int x=num;
+  int i,m,mask;
+  mask=0;
+
+  while (x!=0)
+    {
+     x>>=1;
+     bits_total++;
+    }
+
+  for (i=bits_total,m=1;i>0;i--)
+    {
+     mask|=m;
+     m<<=1;
+     }
+
+return (mask&(num<<left))|(num>>bits_total-left); 
+}
+
+char* itob(int num,char *line)
+{
+   int bits_total=0;
+   int x=num;
+   int i;
+
+   while (x!=0)
+     {
+      x>>=1;
+      bits_total++;
+     }
+
+   line[bits_total+1];
+   line[bits_total]='\0';
+   
+   for (i=bits_total-1;i>=0;i--)
+    {
+      line[i]=(num&1)+'0';
+      num>>=1;
+     }
+return line;
+}

@@ -1,0 +1,100 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define SIZE 31
+#define MXB 15
+
+struct book {
+       int used;
+       char bname[SIZE];
+       char author[SIZE];
+       double value;
+       };
+
+struct book list[MXB];
+
+char* sgets(char*ar,int size)
+{
+   char *p,*pp;
+
+   p=ar;
+   pp=fgets(ar,size,stdin);
+
+   if (pp)
+     {
+       while (*p!='\0'&&*p!='\n')
+             p++;
+       if (*p=='\n')
+           *p='\0';
+       else
+           while (getchar()!='\n');
+     }
+return pp;
+}
+
+int main(void)
+{
+    FILE *fp;
+    int count,filecount,i,ID,x;
+
+
+if ( (fp=fopen("book.dat","r+b"))==NULL)
+   {fprintf(stderr,"Unable to open book.dat.\n");
+    exit(EXIT_FAILURE);}
+
+rewind(fp);
+   for (count=0;count<MXB&&fread(&list[count],sizeof(struct book),1,fp)==1&&list[count].used==1;count++)
+     {
+      if (count==0)
+         printf("Book contents list:\n");
+      printf("Ud:%d ID:%d %s BY %s:$%g\n",list[count].used,count,list[count].bname,list[count].author,list[count].value);
+     }
+
+
+puts("Please enter the ID you wanna change or delete.(press q to quit):");
+     while (scanf("%d",&ID)==1&&count>0)
+      {  
+       while (getchar()!='\n');  
+       puts("(press enter at the start of the line if you wanna delete it");
+       sgets(list[ID].bname,SIZE);
+          if (list[ID].bname[0]!='\0')
+             {
+              puts("Now enter the name of author:");
+              sgets(list[ID].author,SIZE);
+              puts("Now enter the value:");      
+              scanf("%lf",&(list[ID].value));
+              while (getchar()!='\n');
+             }
+          else
+            {
+             count--;
+             for (i=ID;i<count;i++)
+                 list[i] =list[i+1];
+             if (i==count-1)
+                 list[i].used=1;
+             puts("List updated:");
+             for (i=0;i<count;i++)
+                 printf("ID:%d %s BY %s:$%g\n"
+                        ,i,list[i].bname,list[i].author,list[i].value);            
+             list[count].used=0;
+            }
+       puts("Please enter the ID you wanna change or delete.(press q to quit):");
+       }
+
+rewind(fp);
+if (count>0)
+    for (i=0;i<count+1;i++)
+     {
+      if (list[i].used==0)
+         {fwrite(&list[i],sizeof(struct book),1,fp);
+          break;}
+      printf("ID:%d %s BY %s:$%g\n",i,list[i].bname,list[i].author,list[i].value);
+      fwrite(&list[i],sizeof(struct book),1,fp);
+     }
+else
+  puts("No books?Too bad.");
+       
+fclose(fp);
+
+puts("Done!");
+return 0;
+}

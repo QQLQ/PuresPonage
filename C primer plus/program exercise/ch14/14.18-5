@@ -1,0 +1,130 @@
+#include<stdio.h>
+#include<string.h>
+#define NSIZE 20
+#define CSIZE 4
+
+struct name{
+   char fname[NSIZE];
+   char lname[NSIZE];
+           };
+
+struct student{
+   struct name sname;
+   float grade[3];
+   float aver;
+        };
+
+char* sgets(char*line,int size); 
+void getgrade(struct student *stud);
+void getave(struct student *stud);
+void getinfo(struct student *stud);
+void waver(struct student *stud);
+
+int main(void)
+{   char ch='y';
+  struct student stud[CSIZE]={
+               [0].sname={"Q","W"},
+               [1].sname={"A","S"},
+               [2].sname={"E","R"},
+               [3].sname={"D","F"}
+                   };
+
+while (ch=='y')
+   {
+    getgrade(stud);
+    puts("Continue?:");
+    scanf("%c",&ch);
+    while (getchar()!='\n');
+    }
+
+getave(stud);
+getinfo(stud);
+waver(stud);
+
+return 0;
+}
+
+char* sgets(char* line,int size)
+{   char *find,*p;
+    p=fgets(line,size,stdin);
+  
+    if (p)
+    {
+       find=strchr(line,'\n');
+       if (find)
+         *find='\0';
+       else 
+         while (getchar()!='\n');
+     }
+return p;
+} 
+void getgrade(struct student *stud)
+{     char line[NSIZE+NSIZE-1];
+      char name[NSIZE+NSIZE-1];
+      int i,res;
+      res=1;
+
+      printf("Please enter your student name that you wanna record grades with\n");
+      printf("(No blanks between first name and last name.Also be careful with capitals.).\n");
+      while (sgets(line,NSIZE+NSIZE-1))
+         {
+          if (line[0]=='\0')
+             break;
+         for (i=0;i<CSIZE;i++)
+            {strcat(strcpy(name,stud[i].sname.fname),stud[i].sname.lname);
+             if ((res=strcmp(name,line))==0)
+                break;}
+            if (res==0)
+              break;
+         puts("No such name in record.Enter again.");
+         }
+
+for (int x=0;x<3;x++)
+   {printf("Please enter grade[%d] for %s %s:",x+1,stud[i].sname.fname,stud[i].sname.lname);
+    scanf("%f",&stud[i].grade[x]);
+    while (getchar()!='\n');}
+
+return;
+}
+
+void getave(struct student *stud)
+{     int i,x;
+      float total;
+     for (i=0;i<CSIZE;i++)
+       {total=0;
+        for (x=0;x<3;x++)
+          total+=stud[i].grade[x];
+        stud[i].aver=total/3;
+       }
+return;
+}
+
+void getinfo(struct student *stud)
+{
+    int i,x;
+    for (i=0;i<CSIZE;i++)
+     {printf("Student name:%s %s with average grade %.2f\n"
+             ,stud[i].sname.fname
+             ,stud[i].sname.lname
+             ,stud[i].aver);
+      printf("Grade detail as following:\n");
+      for (x=0;x<3;x++)
+         printf("Grade[%d]:%.2f\n",x+1,stud[i].grade[x]);
+       }
+return;
+}
+      
+void waver(struct student *stud)
+{
+    float wholeaver,total;
+    int i,x,n;
+    n=0;
+
+for (total=0,i=1;i<CSIZE;i++)
+   for (x=0;x<3;x++)
+     {total+=stud[i].grade[x];
+      n++;}
+wholeaver=total/n;
+printf("The class average score is %.2f.\n",wholeaver);
+return;
+}

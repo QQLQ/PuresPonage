@@ -1,0 +1,139 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<time.h>
+#define NSIZE 20
+#define RSIZE 6
+#define MNUM 18
+#define RRR 50   //for test,number of player records.
+struct memb_stru{
+   int ID;
+   struct {char fname[NSIZE];char lname[NSIZE];};
+   int showtimes;
+   int hits;
+   int walks;
+   int RBI;
+   float batave;
+          };
+
+struct race_stru{
+   int raceID;
+   int ID;
+   int hits;
+   int walks;
+   int RBI;
+        };
+
+struct memb_stru memb[MNUM];
+
+
+void getdata(void);
+void print_info(void);
+void randomre(void);     //for test, give random statics for race.  
+
+int main(void)
+{
+ int i;
+ for (i=0;i<MNUM;i++)
+    {
+     memb[i].ID=i+1;
+     strcpy(memb[i].fname,"A");
+     strcpy(memb[i].lname,"B");
+     };                          //THIS IS ONLY FOR TEST<Delete it if you want.(Give names).
+     
+getdata();
+
+    
+return 0;
+}
+
+void getdata(void)
+{
+   int count=0;
+   int i;
+   FILE *fpr;
+   
+  struct race_stru temp;
+
+
+   if ( (fpr=fopen("race.dat","r"))==NULL)
+     {if ( (fpr=fopen("race.dat","w+"))==NULL)
+         {fprintf(stderr,"Unable to open or creat file %s.\n","race.dat");
+          exit(EXIT_FAILURE);}
+      fprintf(stderr,"Unable to open file %s.New %s created.\n","race.dat","race.dat");
+     }
+
+   while (fread(&temp,sizeof(struct race_stru),1,fpr)==1)
+         {
+          memb[temp.ID].hits+=temp.hits;
+          memb[temp.ID].walks+=temp.walks;
+          memb[temp.ID].RBI+=temp.RBI;
+          memb[temp.ID].showtimes++;
+          count++;
+         }
+
+   for (i=0;i<MNUM;i++)
+     memb[i].batave=(float)memb[i].hits/(float)memb[i].showtimes;
+
+   
+   if (count>0)
+      print_info();
+    else
+     {puts("No data read.");
+      print_info();}                      //Test to print,to be delete afterwards.
+
+if (fclose(fpr))
+ {fprintf(stderr,"Unable to close %s.Progress terminated.\n","race.dat");
+  exit(EXIT_FAILURE);}
+
+return;
+}
+       
+          
+void print_info(void)
+{  
+   int i;
+   
+   puts("Player statics listed as following:");
+   for (i=0;i<MNUM;i++)
+      printf("ID:%2d %s %s st:%3d hits:%3d walks:%3d rbi:%3d BA:%.3f\n"
+          ,memb[i].ID
+          ,memb[i].fname
+          ,memb[i].lname
+          ,memb[i].showtimes
+          ,memb[i].hits 
+          ,memb[i].walks
+          ,memb[i].RBI
+          ,memb[i].batave
+                );      
+return;
+}
+
+void randomre(void)
+{
+   FILE*fpr;
+   int i;  
+  struct race_stru temp;
+
+   if ( (fpr=fopen("race.dat","w"))==NULL)
+         {fprintf(stderr,"Unable to open file%s,file corrupted or not existed.\n","race.dat");
+          exit(EXIT_FAILURE);}
+     
+   srand((unsigned int)time(0));
+   
+   for (i=0;i<RRR;i++)
+       {
+         temp.raceID=rand()%RRR+1;
+         temp.ID=rand()%18+1;
+         temp.hits=rand()%5;          
+         temp.walks=rand()%18+4;
+         temp.RBI=rand()%5;
+       fwrite(&temp,sizeof(struct race_stru),1,fpr);
+        }
+      
+if (fclose(fpr))
+ {fprintf(stderr,"Unable to close %s.Progress terminated.\n","race.dat");
+  exit(EXIT_FAILURE);}
+
+return;
+}

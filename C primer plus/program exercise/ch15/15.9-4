@@ -1,0 +1,23 @@
+#include<stdio.h>
+
+int teston(int num,int bit);
+
+int main(void)
+{
+   int x,n;
+   printf("Please entert an int and bit number(enter non-number to quit):");
+   if (scanf("%d %d",&x,&n)==2)
+    { 
+       printf("The number on bit %d of %d is %d\n",n,x,teston(x,n));
+    }
+puts("Bye.");
+return 0;
+}
+
+int teston(int num,int bit)
+{
+   num>>=bit;
+   return num&1;
+}
+
+//Do be careful,the bit number starts from 0.

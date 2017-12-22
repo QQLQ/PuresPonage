@@ -1,0 +1,20 @@
+#include<stdio.h>
+#include<string.h>
+typedef struct lens {
+    float foclen;
+    float fstop;
+    char brand[30];
+}LENS;
+
+int main(void)
+{
+    LENS ar[10];
+
+    ar[2].foclen=500;
+    ar[2].fstop=2.0;
+    strncpy(ar[2].brand,"Remarkdata",30);
+    printf("Element3: brand %s with foclen of %g mm and fstop of f/%.1f mm\n",
+           ar[2].brand,ar[2].foclen,ar[2].fstop);
+
+return 0;
+}

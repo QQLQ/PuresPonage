@@ -1,0 +1,22 @@
+#include<stdio.h>
+
+int main(void)
+{
+typedef struct lens {
+    float foclen;
+    float fstop;
+    char brand[30];
+}LENS;
+
+LENS ar[10]={[2].foclen=500,[2].fstop=2.0,[2].brand="Remarkata"};
+LENS AR[10]={
+         [2]={500,2.0,"Remarkata"}
+             };
+    printf("ar:Element3: brand %s with foclen of %g mm and fstop of f/%.1f mm\n",
+           ar[2].brand,ar[2].foclen,ar[2].fstop);
+    printf("AR:Element3: brand %s with foclen of %g mm and fstop of f/%.1f mm\n",
+           AR[2].brand,AR[2].foclen,AR[2].fstop);
+
+
+return 0;
+}

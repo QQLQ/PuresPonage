@@ -1,0 +1,172 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<ctype.h>
+
+   struct month_str {
+     char month[10];
+     char mon[4];
+     int days;
+     int ID;};
+
+  struct month_str months[12]=
+   {
+     {"January","jan",31,1},
+     {"February","feb",28,2},
+     {"March","mar",31,3},
+     {"April","apr",30,4},
+     {"May","may",31,5},
+     {"June","jun",30,6},
+     {"July","jul",31,7},
+     {"August","aug",31,8},
+     {"September","sep",30,9},
+     {"October","oct",31,10},
+     {"November","nov",30,11},
+     {"December","dec",31,12}
+    };
+int getfuncy(void);                  //to get year.
+int getfuncm(void);                  //to get month
+int getfuncd(int year,int mon);      //to get days
+char* sgets(char*,int);         
+void Took(char*);                    //ensure no matter upper or lower, the fully-typed month can be identified.
+void Tolower(char*);                 //for abbr mon.Tolower(mon) and ensure the abbr-typed mon can be identified.
+int cal(int y,int m,int d);          //To get the days in total,and check where it is leap year.
+
+int main(void)
+{
+    int y,m,d;
+    int total;
+    y=getfuncy();
+    m=getfuncm();
+    d=getfuncd(y,m);
+
+
+printf("%d days in total,form start of the year %d until days %d ,month %s\n",
+       cal(y,m,d),y,d,months[m-1].month);
+return 0;
+}
+
+char* sgets(char* line,int size)
+{
+    char *p, *find;
+ 
+    p=fgets(line,size,stdin);
+
+    if (p)
+    {
+      find=strchr(line,'\n');
+     
+     if (find)
+        *find='\0';
+     else
+        while (getchar()!='\n');
+
+    }
+return p;
+}
+
+void Took(char*line)
+{
+  char *p;
+  p=line;    
+
+  if (*p)
+    *p=toupper(*p);
+  while (*p!='\0')
+   *++p=tolower(*p);  
+
+return;
+}
+
+void Tolower(char*line1)
+{  char *p;
+   p=line1;
+
+  while (*p)
+   {*p=tolower(*p);
+    p++;}
+ return;
+}
+
+int getfuncy(void)
+{
+    int year;
+   puts("Plz enter year.");
+  while (scanf("%d",&year)!=1||year<=0)
+    {puts("Invalid input.Put it again.");
+     while (getchar()!='\n');}
+  while (getchar()!='\n');  
+
+return year;
+}
+
+int getfuncm(void)
+{   
+    char line[15],line1[15];
+    int i,num;
+    char *p;
+ 
+    puts("Please enter the month.(No matter upper or lower.)");
+
+   while (sgets(line,15))
+    {  
+       if (line[0]=='\0')
+          {puts("Bye!");
+           exit(EXIT_SUCCESS);}
+       strcpy(line1,line);
+       Tolower(line1);
+
+       p=line;
+       while (isdigit(*p))
+          p++;
+       if (*p=='\0')
+         {num=atoi(line);
+          if ( num>=1&&num<=12)
+            return num;} 
+       else
+         {Took(line);
+          for (i=0;i<12;i++)
+             if (strcmp(line,months[i].month)==0||strcmp(line1,months[i].mon)==0)
+                return months[i].ID;}
+       
+       puts("There is no such month, plz enter again");
+     }      
+}
+
+int cal(int y,int m,int d)
+{
+   int i;
+   int total=0;
+if (m>1)
+   {for (i=0;i<m-1;i++)
+     total+=months[i].days;
+     total+=d;}
+else 
+   total+=d;
+
+if (y%100!=0&&y%4==0&&m>2)
+   return total+1;
+else if (y%400==0&&m>2)
+   return total+1;
+else
+   return total;
+}
+
+int getfuncd(int year,int mon)
+{ int days;
+ 
+  puts("Please enter days.");
+  while (scanf("%d",&days),1)
+    {
+      if (year%100!=0&&year%4==0&&mon==2&&days<=months[mon-1].days+1)
+           return days;
+      if (year%400==0&&mon==2&&days<=months[mon-1].days+1)
+           return days;
+      if (days<=months[mon-1].days)
+        return days;
+      printf("Days must be no more than %d,since it is the %s of%sleap year.\n"
+             ,(year%400==0&&mon==2)||(year%100!=0&&year%4==0&&mon==2)?months[mon-1].days+1:months[mon-1].days
+             ,months[mon-1].month
+             ,year%400==0||(year%100!=0&&year%4==0)?" ":" non-");
+     }
+}

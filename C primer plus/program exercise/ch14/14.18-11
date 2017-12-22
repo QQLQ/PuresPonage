@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<math.h>
+#define SIZE 100
+
+void transform(double*source,double*target,int size,double (*pfun)(double));
+double square_f(double);
+double cube_f(double);
+
+int main(void)
+{
+   double source[4][SIZE];
+   double target[4][SIZE];
+   int i,n;
+   double x;
+double (*pfun[4])(double)={square_f,cube_f,sin,cos};
+
+
+for (n=0;n<4;n++)
+   for (i=0,x=0;i<SIZE;i++,x++)
+    source[n][i]=x;
+
+for (i=0;i<4;i++)
+    transform(source[i],target[i],SIZE,pfun[i]);
+
+printf("[0]%f [1]%f [2]%f [3]%f\n",target[0][2],target[1][2],target[2][2],target[3][2]);
+//for test,the second index is just a random number.choose anyting you wish
+   
+return 0;
+}
+
+void transform(double*source,double*target,int size,double (*pfun)(double))
+{
+     int i;
+
+   for (i=0;i<size;i++)
+      target[i]=pfun(source[i]);
+
+return;
+}
+
+double square_f(double x)
+{
+  return x*x;
+}
+   
+double cube_f(double x)
+{
+  return x*x*x;
+}
+
+// Do not forget -lm(to link math library) when compling.I have no idea why....i should learn more.

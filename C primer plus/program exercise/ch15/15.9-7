@@ -1,0 +1,183 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+#define fill_ID 0xff
+#define fill_size 0x7f00
+#define fill_align 0x30000
+#define align_left 0x00000
+#define align_center 0x10000
+#define align_right 0x20000
+#define on_bold 0x040000
+#define on_italic 0x080000
+#define on_under 0x100000
+
+unsigned long font;
+
+void showsettings(void);
+char getchoice(void);
+void ID_config(void);
+void size_config(void);
+void align_config(void);
+void bold_config(void);
+void italic_config(void);
+void underline_config(void);
+
+int main(void)
+{ 
+  char option;
+
+  while (showsettings(),option=getchoice())
+    {
+       switch (option)
+        {
+           case 'F':
+           case 'f': ID_config();       break;
+           case 'S':
+           case 's': size_config();     break;
+           case 'A':
+           case 'a': align_config();    break;
+           case 'B':
+           case 'b': bold_config();     break;
+           case 'I':
+           case 'i': italic_config();   break;
+           case 'U':
+           case 'u': underline_config();break;
+           case 'Q':
+           case 'q': puts("Bye!"); 
+                     exit(EXIT_SUCCESS);
+          }
+      }
+ 
+printf("If you see this line,it means something goes wrong....go blame Tokiomi.\n");
+
+return 0;
+}
+
+void showsettings(void)
+{  
+   char *align;
+   switch (font&fill_align)
+     {
+      case align_left  :align="left"   ;break;
+      case align_center:align="center" ;break;
+      case align_right :align="right"  ;break;
+      }
+
+   printf(" ID SIZE ALIGNMENT    B    I    U\n"
+            "%3ld%5ld    %-6s   %3s  %3s  %3s",
+            font&fill_ID,
+            (font&fill_size)>>8,
+            align,
+            (font&on_bold)==on_bold?"on":"off",
+            (font&on_italic)==on_italic?"on":"off",
+            (font&on_under)==on_under?"on":"off");
+return;
+}
+
+char getchoice(void)
+{
+     char option;
+     printf("\n\n");
+     printf("f)change font    s)change size    a)change alignment\n"
+            "b)toggle bold    i)toggle italic  u)toggle underline\n"      
+            "q)quit\n");
+
+     while (scanf("%c",&option),1)
+      {
+       while (getchar()!='\n');
+       if (strchr("fsabiuqFSABIUQ",option))
+        break;
+       puts("Invalid input,enter again.");
+      }
+return option;
+}
+
+void ID_config(void)
+{   
+   int num,check,mask;
+   printf("Enter font ID (0-255): ");
+   
+   while (check=scanf("%d",&num),1)
+   {
+    while (getchar()!='\n');
+    if ( check==1  )
+      {
+       font&=(~fill_ID);
+       mask=0xff;
+       num&=mask;
+       break;
+      }
+   printf("Invalid input, int must be from 0-255:");
+   }
+font|=num;
+return;
+}
+
+void size_config(void)
+{   
+   int num,check,mask;
+   printf("Enter font size (0-127): ");
+   
+   while (check=scanf("%d",&num),1)
+   {
+    while (getchar()!='\n');
+    if ( check==1 )
+     {
+      font&=(~fill_size);
+      num<<=8;
+      num&=fill_size;  
+      break;
+     }
+   printf("Invalid input, int must be from 0-127:");
+   }
+font|=num;
+return;
+}
+
+void align_config(void)
+{
+   char option;
+
+  puts("Select alignment:");
+  puts("l)left   c)center r)right");
+  while (scanf("%c",&option),1)
+      {
+       while (getchar()!='\n');
+       if (strchr("lcrLCR",option))
+        break;
+       puts("Invalid input,enter again.");
+      }
+
+  font&=(~fill_align);
+
+  switch (option)
+    {
+      case 'L':
+      case 'l':font|=align_left   ;break;  
+      case 'C':
+      case 'c':font|=align_center ;break;
+      case 'R':
+      case 'r':font|=align_right  ;break;
+     }
+
+return;
+}
+  
+void bold_config(void)
+{
+    font^=on_bold;     
+return;
+}
+
+void italic_config(void)
+{
+    font^=on_italic;
+return;
+}
+
+void underline_config(void)
+{
+    font^=on_under;
+return;
+}

@@ -1,0 +1,170 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+struct {
+    unsigned int ID      :8;
+    unsigned int size    :7;
+    unsigned int         :1;
+    unsigned int align   :2;
+    unsigned int bold    :1;
+    unsigned int italic  :1;
+    unsigned int under   :1;
+    unsigned int         :3;
+       } font;
+
+void showsettings(void);
+char getchoice(void);
+void ID_config(void);
+void size_config(void);
+void align_config(void);
+void bold_config(void);
+void italic_config(void);
+void underline_config(void);
+
+int main(void)
+{ 
+  char option;
+
+  while (showsettings(),option=getchoice())
+    {
+       switch (option)
+        {
+           case 'F':
+           case 'f': ID_config();       break;
+           case 'S':
+           case 's': size_config();     break;
+           case 'A':
+           case 'a': align_config();    break;
+           case 'B':
+           case 'b': bold_config();     break;
+           case 'I':
+           case 'i': italic_config();   break;
+           case 'U':
+           case 'u': underline_config();break;
+           case 'Q':
+           case 'q': puts("Bye!"); 
+                     exit(EXIT_SUCCESS);
+          }
+      }
+ 
+printf("If you see this line,it means something goes wrong....go blame Tokiomi.\n");
+
+return 0;
+}
+
+void showsettings(void)
+{
+   char *align;
+   switch (font.align)
+     {
+      case 0:align="left"  ;break;
+      case 1:align="middle";break;
+      case 2:align="right" ;break;
+      }
+
+   printf(" ID SIZE ALIGNMENT    B    I    U\n"
+            "%3d%5d    %-6s   %3s  %3s  %3s",
+            font.ID,
+            font.size,
+            align,
+            font.bold==1?"on":"off",
+            font.italic==1?"on":"off",
+            font.under==1?"on":"off");
+return;
+}
+
+char getchoice(void)
+{
+     char option;
+     printf("\n\n");
+     printf("f)change font    s)change size    a)change alignment\n"
+            "b)toggle bold    i)toggle italic  u)toggle underline\n"      
+            "q)quit\n");
+
+     while (scanf("%c",&option),1)
+      {
+       while (getchar()!='\n');
+       if (strchr("fsabiuqFSABIUQ",option))
+        break;
+       puts("Invalid input,enter again.");
+      }
+return option;
+}
+
+void ID_config(void)
+{   
+   int num,check;
+   printf("Enter font ID (0-255): ");
+   
+   while (check=scanf("%d",&num),1)
+   {
+    while (getchar()!='\n');
+    if ( check==1&&(num>=0&&num<=255) )
+      break;
+   printf("Invalid input, int must be from 0-255:");
+   }
+font.ID=num;
+return;
+}
+
+void size_config(void)
+{   
+   int num,check;
+   printf("Enter font size (0-127): ");
+   
+   while (check=scanf("%d",&num),1)
+   {
+    while (getchar()!='\n');
+    if ( check==1&&(num>=0&&num<=127) )
+      break;
+   printf("Invalid input, int must be from 0-127:");
+   }
+font.size=num;
+return;
+}
+
+void align_config(void)
+{
+   char option;
+
+  puts("Select alignment:");
+  puts("l)left   c)center r)right");
+  while (scanf("%c",&option),1)
+      {
+       while (getchar()!='\n');
+       if (strchr("lcrLCR",option))
+        break;
+       puts("Invalid input,enter again.");
+      }
+
+  switch (option)
+    {
+      case 'L':
+      case 'l':font.align=0   ;break;  
+      case 'C':
+      case 'c':font.align=1   ;break;
+      case 'R':
+      case 'r':font.align=2   ;break;
+     }
+
+return;
+}
+  
+void bold_config(void)
+{
+    font.bold^=1;     
+return;
+}
+
+void italic_config(void)
+{
+    font.italic^=1;
+return;
+}
+
+void underline_config(void)
+{
+    font.under^=1;
+return;
+}
+//didnt use mask and operater &. I will get a cpp-asked version very soon.

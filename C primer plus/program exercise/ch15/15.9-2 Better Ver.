@@ -1,0 +1,54 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int btoi(char *bline);
+char* itob(int res,char *line,int strlen);
+
+int main(int argc,char *argv[])
+{ 
+  char line[33];
+  int s1,s2;
+  if (argc!=3)
+    {
+    printf("Usage:%s [bis] [bis]\n",argv[0]);
+    exit(EXIT_FAILURE);
+    }
+
+s1=strlen(argv[1])+1;
+s2=strlen(argv[2])+1;
+
+printf("~%s=%s\n",argv[1],itob(~btoi(argv[1]),line,s1) );
+printf("~%s=%s\n",argv[2],itob(~btoi(argv[2]),line,s2) );
+printf("%s&%s=%s\n",argv[1],argv[2],itob(btoi(argv[1])&btoi(argv[2]),line,s1>s2?s1:s2) );
+printf("%s|%s=%s\n",argv[1],argv[2],itob(btoi(argv[1])|btoi(argv[2]),line,s1>s2?s1:s2) );
+printf("%s^%s=%s\n",argv[1],argv[2],itob(btoi(argv[1])^btoi(argv[2]),line,s1>s2?s1:s2) );
+
+return 0;
+}
+
+int btoi(char *bline)
+{
+   char*p;
+   int tot=0;
+   p=bline;
+
+   while (*p)
+    {
+     tot<<=1;
+     tot|=*p++-'0';
+    }
+return tot;
+}
+    
+char* itob(int res,char *line,int strlen)
+{   int i;
+    line[strlen-1]='\0';
+    for (i=strlen-2;i>=0;i--)
+      {
+       line[i]=(res&1)+'0';
+       res>>=1;
+      }
+ 
+return line;
+}

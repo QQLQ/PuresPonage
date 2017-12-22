@@ -1,0 +1,35 @@
+#include<stdio.h>
+
+int btoi(char*);
+
+int main(void)
+{
+  char *pbin="01001001";
+
+printf("%d\n",btoi(pbin));
+
+return 0;
+}
+
+int btoi(char* pbin)
+{
+   char *p;
+   int i=0,n=0,tot=0;
+   p=pbin;
+
+   while (*p)
+    {
+     p++;
+     i++;
+    }
+
+   while (i-->0)
+     {
+     tot+=(*--p-'0')<<n;
+     n++;
+     }
+return tot;
+}
+
+
+//By the way,binary 01001001, in my opinion, is 73.So I can not return an int with 25.
