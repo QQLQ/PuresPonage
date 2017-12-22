@@ -8,7 +8,7 @@ int main(void)
    cout<<"Enter the size please."<<endl;
    cin>>size;
    int* pt=new int[size];
-   delete pt;
+   delete [] pt;
    vector<int>ar(size);
    return 0;
 }
