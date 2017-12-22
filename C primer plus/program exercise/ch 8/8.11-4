@@ -1,0 +1,24 @@
+#include<stdio.h>
+#include<ctype.h>
+int main(void)
+{
+    int word=0,n=0,i=0;
+    char ch;
+     while ( (ch=getchar()) !=EOF)
+      { 
+           if (isalpha(ch))
+               {i++;
+                if (word==0)
+                   {word=1;
+                    n++;}
+               }
+  
+           if (( ispunct(ch) || ch==' ' )&&(word==1))
+              word=0;
+       }
+printf("There are %f characters per word.(words = %d,alp=%d).\n",(float)i/n, n,i);
+
+return 0;  
+}
+
+                 

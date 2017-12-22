@@ -1,0 +1,18 @@
+#include<stdio.h>
+#include<ctype.h>
+int main(void)
+{
+    char ch;
+    int n,m;
+    n=m=0;
+
+    while ((ch=getchar())!=EOF)
+       {   if (isupper(ch))
+             n++;
+           if (islower(ch))
+             m++;
+       }
+        printf("Upper=%d,Lower=%d.\n",n,m);
+            
+        return 0;
+}  

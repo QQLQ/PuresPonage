@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<ctype.h>
+char getfirst(void);
+int main(void)
+{
+ char ch;
+while  ((ch=getfirst())!=EOF)
+    {
+     putchar(ch);
+     putchar('\n');
+    }
+return 0;
+}
+
+char getfirst(void)
+{
+   int ch;
+   
+   while (isspace(ch=getchar()));
+   while (getchar()!='\n');
+
+return ch;
+}

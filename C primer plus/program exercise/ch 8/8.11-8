@@ -1,0 +1,65 @@
+#include<stdio.h>
+char TOP(void);
+float ENTER(char ch,char k);
+int main(void)
+{ char ch,k;
+  float a,b,m;
+
+while (ch=TOP())
+     switch (ch)
+       {case 'a':a=ENTER(ch,'a');b=ENTER(ch,'b');m=a+b;printf("%g+%g=%g\n",a,b,m);break;
+        case 's':a=ENTER(ch,'a');b=ENTER(ch,'b');m=a-b;printf("%g-%g=%g\n",a,b,m);break;
+        case 'm':a=ENTER(ch,'a');b=ENTER(ch,'b');m=a*b;printf("%g*%g=%g\n",a,b,m);break;
+        case 'd':a=ENTER(ch,'a');b=ENTER(ch,'b');m=a/b;printf("%g/%g=%g\n",a,b,m);break;
+        case 'q':printf("Have a nice day then!Bye!\n");return 0;}
+}
+
+
+
+char TOP(void)
+{
+    char ch;
+
+    printf("Enter the operation of yout choice:\n"
+           "a.add             s.subtract\n"
+           "m.multiply        d.divide\n"
+           "q.quit\n");
+  
+    while  (scanf("%c",&ch)!=1&&!(ch=='a'||ch=='s'||ch=='m'||ch=='d'||ch=='q'))
+           {printf("Invalid input,reenter:");
+            while ( getchar()!='\n');}
+
+return ch;
+}
+
+
+
+float ENTER(char ch,char k)
+{
+     float i;
+     char n;
+ 
+     printf("Enter the %s number:",k=='a'?"first":"second");
+     while (scanf("%f",&i)!=1)
+          { 
+             while ((n=getchar())!='\n')
+              putchar(n);
+             printf(" is not a number.\n");
+             printf("Please enter a number such as 2.5:");
+           }
+ 
+    if (i==0&&ch=='d'&&k=='b')
+         do {printf("Enter a number other than 0:");
+            while (getchar()!='\n');
+            scanf("%f",&i);}  while (i==0);
+        while (getchar()!='\n');
+return i;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+#include<stdio.h>
+int main(void)
+{   char ch;
+    int n=0;
+    while (getchar()!=EOF)
+      {n++;
+       putchar(ch);
+      }
+printf("There are %d characte%s in this essay\n.",n,n>1?"rs":"r"); 
+
+return 0;
+}   
+         

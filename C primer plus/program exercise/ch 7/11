@@ -1,0 +1,133 @@
+#include<stdio.h>
+#define YJ 2.05
+#define TC 1.15
+#define HLB 1.09
+#define DISC 0.05
+#define DISP 100
+#define LIM1 5
+#define PLIM1 6.5
+#define LIM2 20
+#define PLIM2 14
+#define PLIM3 0.5  
+#define TEST printf("|*TEST*|");
+void TOPD(void);
+
+int main(void)
+{  /*a1*/
+   float yj,tc,hlb;
+   float p_yj,p_tc,p_hlb;
+   float w_total,p_total,disc,t_fee,ptotal;
+   yj=tc=hlb=0;
+   w_total=p_total=0;
+   p_yj=p_tc=p_hlb=0;
+   float tw;
+   int x;
+   int n=0;
+RET:TOPD();
+   
+   while (scanf("%d",&x)==1 )
+   { /*a2*/if (x>0&&x<5)
+    /*a4*/ { 
+             if (x==4)
+             /*a3*/ {    yj=tc=hlb=0;
+                      w_total=p_total=0;
+                      p_yj=p_tc=p_hlb=0;
+                      n=0;
+                      printf("All reset.\nStart to choose:");
+                      continue;
+             /*a3*/ }
+ printf("How much do you want?(Enter pound in float or other to ignore:");       
+           if (scanf("%f",&tw)==1 )
+      /*a5*/{ n++;
+              switch (x)
+               { case 1:  yj+= tw;
+                           p_yj=yj*YJ;
+                           break;
+                 case 2:  tc+= tw;
+                           p_tc=tc*TC;
+                           break;
+                 case 3:  hlb+= tw;
+                           p_hlb=hlb*HLB;
+                           break;}
+                    printf("Current"); 
+                  w_total=yj+tc+hlb;
+                  p_total=p_yj+p_tc+p_hlb;
+                  disc= p_total>DISP?(p_total)*DISC:0;
+                  p_total=p_total-disc;  
+
+           printf("Current status:\n"
+                   "1)Artichoke:%g ponds.2)Beta Vulgaris:%g ponds\n"
+                   "3)Carrot: %g ponds.\n"
+                  "%g ponds in total and $%g dollars (discount=$%.2g)\n",yj,tc,hlb,
+                  w_total,p_total,disc);
+           printf("What else do you want?Enter your choice:");   
+             }/*a5*/
+         else
+             {printf("Invalid input.Go back to input:");
+              getchar()!='\n';
+              continue;}                        
+       /*a4*/} 
+     else 
+             {printf("Invalid input.Go back to input:");
+              getchar()!='\n';
+              continue;}            
+
+    }/*a2*/
+
+if (getchar()=='q')
+   {printf("Ok,bye\n");
+   return 0;}
+else if (n==0)
+   {printf("Nothing entered.Please retry.\nPlease enter yout choice:");
+   getchar()!='\n';
+   goto RET;}
+else 
+  { if (w_total<LIM1)
+        t_fee=PLIM1;
+    else if (w_total<LIM2)
+        t_fee=PLIM2;
+    else 
+        t_fee=(w_total-LIM2)*PLIM3+PLIM2;
+       
+ ptotal=p_total+t_fee;
+ printf("Here is result:\n");        
+ 
+if (yj>0)
+    printf("1)Artichoke:%g ponds.($%g)\n",yj,p_yj);    
+if (tc>0)
+    printf("2)Beta Vulgaris:%g ponds.($%g)\n",tc,p_tc);
+if (hlb>0) 
+    printf("3)Carrot: %g ponds.($%g)\n",hlb,p_hlb);
+printf("%g ponds in total and $%.2f(B),also tfee=$%.2f\n",w_total,p_total,t_fee);
+
+if (disc!=0)
+    printf("Discount=$%.2f\n",disc);
+
+printf("Final is $%.2f\n",ptotal);
+        yj=tc=hlb=0;
+        w_total=p_total=0;
+        p_yj=p_tc=p_hlb=0;
+        n=0;
+     getchar();
+     getchar()!='\n'; 
+      
+                
+    goto RET;
+    }
+}/*a1*/
+
+void TOPD(void)
+{
+  int i;
+  for (i=1;i<=65;i++)
+       putchar('*');
+printf("\nHere is today's vegetable sale list.\n");
+printf("1)Artichoke $%g/lb         2)Beta Vulgaris %g/lb\n"
+       "3)Carrot    $%g/lb         4)Input again\n"
+       "Anything you need?\n?",YJ,TC,HLB); 
+  for (i=1;i<=65;i++)
+       putchar('*');
+
+printf("\nPlease enter number(\'q\' to quit or others to show result:");
+
+}

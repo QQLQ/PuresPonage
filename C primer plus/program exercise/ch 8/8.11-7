@@ -1,0 +1,92 @@
+#include<stdio.h>
+#include<string.h>
+#define COMP 1.5
+#define lihour 40.0
+#define li1 300.0
+#define li2 150.0
+#define F "Enter the number corresponding to the desired pay rate or action:\n"
+char TOP(void);
+void DEC(void);
+int main(void)
+{  
+    float n,m,BASE,s,s1,s2;
+    char i;
+
+DEC();
+
+TOp:i=TOP();
+
+while ( i!='q')
+{
+   switch (i)
+     {
+       case 'A':BASE=8.75; break;
+       case 'B':BASE=9.33; break;
+       case 'C':BASE=10.00;break;
+       case 'D':BASE=11.20;break;
+      }
+       
+     
+printf("Enter ur hours:\n");
+
+while (scanf("%f",&n)!=1)
+     { while (getchar()!='\n');
+      printf("wrong input, retry:");
+     }
+m= n>lihour?(n-lihour)*COMP+lihour:n;
+
+s=BASE*m;
+
+s1=li1*.15;
+s2=li2*.2;
+
+if (s<=li1)
+   s*=(1-.15);
+else if(s<=li1+li2)
+   s=li1-s1+ (s-li1)*(1-.2);
+else
+   s=li1-s1+li2-s2+(s-li1-li2)*(1-.25);
+
+printf("n=%g.m=%g.s=%g.\nYour next choice?:",n,m,s);
+
+while (getchar()!='\n');
+goto TOp;
+}
+printf("OK,bye!\n");
+
+return 0;
+}   
+
+void DEC(void)
+{    int i,f; 
+     f=strlen(F);
+     for (i=1;i<=f+3;i++) 
+          printf("*");
+          printf("\n");
+
+      printf("%s",F);
+      printf("A)$8.75/hr                       B)$9.33/hr\n"
+             "C)$10.00/hr                      D)11.20/hr\n"
+             "q)quit\n");
+
+     for (i=1;i<=f+3;i++) 
+          printf("*");
+          printf("\n");
+
+printf("plz enter:");
+}
+
+char TOP(void)
+{    char n;
+    
+while ( (scanf("%c",&n))!=1 ||!((n>='A'&&n<='D')||n=='q') )
+      { 
+       while (getchar()!='\n');
+       printf("Invalid input. Please enter int from A to D,or q to quit:");
+      }
+return n;
+}
+
+
+
+     

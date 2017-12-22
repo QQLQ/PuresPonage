@@ -1,0 +1,47 @@
+#include<stdio.h>
+int IP(int a,int b);
+int main(void)
+{
+    int a=0;
+    int b=100;
+    int k;
+printf("Lets start the game!");
+   k=IP(a,b);
+  printf("Great,I know i can make it.Bye!\n");
+return 0;
+}
+
+int IP(int a,int b)
+{
+   char ch;  
+   int k=(a+b)/2;
+  
+   printf("Is it %d?:",k);
+  
+   while ((ch=getchar())!='y')
+       {  while (getchar()!='\n');
+          if (ch=='n')
+          {printf("I see, is it larger or smaller?:");
+           if ((ch=getchar())=='b'||ch=='s')
+              {if (ch=='b')
+                  b=k;
+               else 
+                  a=k;
+               }
+           else 
+             {printf("Not ok.\n");
+              printf("Is it %d?:",k);
+              while (getchar()!='\n');  
+              continue;}
+           k=(a+b)/2;
+            while (getchar()!='\n');
+            printf("Is it %d?:",k);
+           } 
+          else 
+            printf("Nah, reenter:");
+      }
+return k;
+}
+          
+
+   
