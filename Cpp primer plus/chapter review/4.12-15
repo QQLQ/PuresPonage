@@ -1,0 +1,21 @@
+#include<iostream>
+
+struct Fish_struct {
+     char kind[20];
+     int weight;
+     double length;
+        };
+
+
+int main(void)
+{
+   using namespace std;
+   Fish_struct fish={"Salmon",3,2.3};
+
+   struct Fish_struct* pstru;
+   pstru=new Fish_struct;
+   (*pstru)=fish;
+   cout<<pstru->kind<<endl;
+   return 0;
+}
+   
