@@ -1,0 +1,33 @@
+#include<iostream>
+#include<cstring>
+struct CandyBar{
+       char name[20];
+       double weight;
+       int cal;
+       };
+
+int main(void)
+{
+   using namespace std;
+
+   struct CandyBar*pstru=new struct CandyBar[3];
+   
+   strcpy(pstru[0].name,"Mocha Munch");
+   strcpy(pstru[1].name,"Mocha Munch");
+   strcpy(pstru[2].name,"Mocha Munch");
+   pstru[2].weight=pstru[1].weight=pstru[0].weight=2.3;
+   pstru[2].cal=pstru[1].cal=pstru[0].cal=350;
+
+   cout<<"name: "<<pstru[0].name<<endl;
+   cout<<"weight: "<<pstru[0].weight<<endl;
+   cout<<"cal: "<<pstru[0].cal<<endl;
+   cout<<"name: "<<pstru[1].name<<endl;
+   cout<<"weight: "<<pstru[1].weight<<endl;
+   cout<<"cal: "<<pstru[1].cal<<endl;
+   cout<<"name: "<<pstru[2].name<<endl;
+   cout<<"weight: "<<pstru[2].weight<<endl;
+   cout<<"cal: "<<pstru[2].cal<<endl;
+   delete [] pstru;
+   return 0;
+}
+   
