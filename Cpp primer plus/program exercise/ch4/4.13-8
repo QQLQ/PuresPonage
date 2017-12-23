@@ -1,0 +1,23 @@
+#include<iostream>
+
+struct Pizza_struct {
+     char name[30];
+     double diameter;
+     double weight;
+         };
+
+int main(void)
+{
+   using namespace std;
+   Pizza_struct* pstru;
+   pstru=new Pizza_struct;
+   cout<<"Enter diameter for pizza:";
+   cin>>pstru->diameter;
+   cout<<"Enter name of company for pizza:";
+   cin>>pstru->name;
+   cout<<"Enter weight for pizza:";
+   cin>>pstru->weight;
+   cout<<"name:"<<pstru->name<<" dia:"<<pstru->diameter<<"weight: "<<pstru->weight<<endl;
+   delete pstru;
+   return 0;
+}
