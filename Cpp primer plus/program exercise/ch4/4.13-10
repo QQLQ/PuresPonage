@@ -1,0 +1,18 @@
+#include<iostream>
+#include<array>
+
+int main(void)
+{
+    using namespace std;
+    int i=1;
+    array<double,3>ar;
+    cout<<"Enter the result "<<i<<":";
+    cin>>ar[0];
+    cout<<"Enter the result "<<++i<<":";
+    cin>>ar[1];
+    cout<<"Enter the result "<<++i<<":";
+    cin>>ar[2];
+    cout<<"You entered "<<++i<<" times"<<" and even number is "<<(ar[0]+ar[1]+ar[2])/3<<endl;
+    return 0;
+}    
+    
