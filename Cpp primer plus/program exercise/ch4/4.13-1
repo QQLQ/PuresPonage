@@ -1,0 +1,23 @@
+#include<iostream>
+#include<string>
+
+int main(void)
+{
+   using namespace std;
+   string fname;
+   char lname[20];
+   char grade;
+   int age;
+   cout<<"What is your first name?";
+   getline(cin,fname);
+   cout<<"Whar is your last name?";
+   cin.getline(lname,20);
+   cout<<"what letter grade do you deserve?";
+   cin>>grade;
+   cout<<"What is your age?";
+   cin>>age;
+   cout<<"Name: "<<lname<<", "<<fname<<endl;
+   cout<<"Grade: "<<char(grade+1)<<endl;
+   cout<<"Age: "<<age<<endl;
+   return 0;
+}
