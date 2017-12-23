@@ -1,0 +1,21 @@
+#include<iostream>
+
+struct Pizza_struct {
+     char name[30];
+     double diameter;
+     double weight;
+         };
+
+int main(void)
+{
+   using namespace std;
+   struct Pizza_struct pizza;
+   cout<<"Enter name of company for pizza:";
+   cin>>pizza.name;
+   cout<<"Enter diameter for pizza:";
+   cin>>pizza.diameter;
+   cout<<"Enter weight for pizza:";
+   cin>>pizza.weight;
+   cout<<"name:"<<pizza.name<<" dia:"<<pizza.diameter<<"weight: "<<pizza.weight<<endl;
+   return 0;
+}
