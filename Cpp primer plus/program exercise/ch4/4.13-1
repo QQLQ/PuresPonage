@@ -1,15 +1,15 @@
 #include<iostream>
 #include<string>
-
+#define NSIZE 20
 int main(void)
 {
    using namespace std;
-   string fname;
-   char lname[20];
+   char fname[NSIZE];
+   char lname[NSIZE];
    char grade;
    int age;
    cout<<"What is your first name?";
-   getline(cin,fname);
+   cin.get(fname,20).get();
    cout<<"Whar is your last name?";
    cin.getline(lname,20);
    cout<<"what letter grade do you deserve?";
