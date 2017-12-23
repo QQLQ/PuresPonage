@@ -1,0 +1,18 @@
+#include<iostream>
+
+using namespace std;
+
+int main(void)
+{
+   struct CandyBar{
+       char name[20];
+       double weight;
+       int cal;
+       };
+   CandyBar snack={"Mocha Munch",2.3,350};
+   cout<<"name: "<<snack.name<<endl;
+   cout<<"weight: "<<snack.weight<<endl;
+   cout<<"cal: "<<snack.cal<<endl;
+   return 0;
+}
+   
