@@ -1,0 +1,18 @@
+#include<iostream>
+#include<cstring>
+
+int main(void)
+{
+  using namespace std;
+  char word[25];
+  int words=0;
+  cout<<"Enter woeds (to stop,type the word done):"<<endl;
+  cin>>word;
+  while (strcmp(word,"done"))
+   {
+     words++;
+     cin>>word;
+   }
+  cout<<"You entered a total of "<<words<<" words."<<endl;
+  return 0;
+}
