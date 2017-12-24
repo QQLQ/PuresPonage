@@ -1,11 +1,11 @@
 #include<iostream>
-
+#include<array>
 const int ArSize =101;
 
 int main(void)
 {
    using namespace std;
-   long double ar[ArSize];
+   array<long double,ArSize>ar;
    ar[0]=ar[1]=1;
    for (int i=2;i<ArSize;i++)
      ar[i]=ar[i-1]*i;
