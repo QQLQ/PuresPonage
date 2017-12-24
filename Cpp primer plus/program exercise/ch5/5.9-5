@@ -1,0 +1,23 @@
+#include<iostream>
+
+const int MONTHS=12;
+
+int main(void)
+{
+   using namespace std;
+   const char* months[MONTHS]=
+           {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+   int ar[MONTHS];
+   int sum=0;
+      
+   for (int i=0;i<MONTHS;i++)
+    {
+     cout<<"please enter the sale number for books in "<<months[i]<<": ";
+     cin>>ar[i];
+    }           //Of course you can put sum+=ar[i] here.
+   for (int x:ar)
+     sum+=x;    //However I prefer this feature.So awesome.
+   cout<<sum<<" books have been sold."<<endl;
+   return 0;
+}
+       
