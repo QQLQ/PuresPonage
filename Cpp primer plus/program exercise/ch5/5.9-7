@@ -1,0 +1,29 @@
+#include<iostream>
+#include<string>
+
+using namespace std;
+struct car {
+    string make;
+    int year;
+          };
+          
+int main(void)
+{
+   int stru_SIZE;
+   cout<<"How many cars do you wish to catlog?";
+   (cin>>stru_SIZE).get();
+   car* pstru=new car[stru_SIZE];
+   for (int i=0;i<stru_SIZE;i++)
+     { 
+      cout<<"Car #"<<(i+1)<<":"<<endl;
+      cout<<"Please enter the make: ";
+      getline(cin,pstru[i].make);
+      cout<<"Please enter the year made: ";
+      (cin>>pstru[i].year).get();
+     }
+   cout<<"Here is your collection:"<<endl;
+   for (int i=0;i<stru_SIZE;i++)
+     cout<<pstru[i].year<<"\t"<<pstru[i].make<<endl;
+   delete [] pstru;
+   return 0;
+}
