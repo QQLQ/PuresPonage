@@ -1,0 +1,19 @@
+#include<iostream>
+
+int main(void)
+{
+   using namespace std;
+   double sum_Daphne=100;
+   double sum_Cleo  =100;
+   int n=0;
+   
+   while (sum_Cleo<=sum_Daphne)
+     {
+      n++;
+      sum_Daphne+=100*0.1;
+      sum_Cleo*=1.05;
+     }
+   cout<<"In "<<n<<" years, Celo's investment ($"<<sum_Cleo
+       <<") will be more than Daphne's($"<<sum_Daphne<<")."<<endl;
+   return 0;
+} 
