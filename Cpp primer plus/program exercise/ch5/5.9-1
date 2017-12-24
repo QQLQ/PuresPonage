@@ -1,0 +1,16 @@
+#include<iostream>
+
+int main(void)
+{
+   using namespace std;
+   int a,b,sum,i;
+   
+   cout<<"Enter start number: ";
+   cin>>a;
+   cout<<"Enter end number: ";
+   cin>>b;
+   for (sum=0,i=a;i<=b;i++)
+       sum+=i;
+   cout<<"sum from "<<a<<" to "<<b<<" is "<<sum<<endl;
+   return 0;
+}
