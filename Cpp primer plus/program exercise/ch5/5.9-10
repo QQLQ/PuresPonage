@@ -1,0 +1,18 @@
+#include<iostream>
+
+int main(void)
+{
+  using namespace std;
+  int rows;
+  cout<<"Enter number of rows: ";
+  cin>>rows;
+  for (int i=1;i<=rows;i++)
+    {
+     for (int a=1;a<=(rows-i);a++)
+       cout<<".";
+     for (int a=1;a<=i;a++)
+       cout<<"*";
+     cout<<endl;
+    }
+   return 0;
+}  
