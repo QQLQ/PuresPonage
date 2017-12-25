@@ -1,0 +1,53 @@
+#include<iostream>
+#include<cstdlib>
+
+const int strsize=31;
+const int struct_size=5;
+
+struct bop {
+    char fullname[strsize];
+    char title[strsize];
+    char bopname[strsize];
+    int preference;
+         };
+
+int main(void)
+{
+  using namespace std;
+  bop member[struct_size]={
+      {"Wimp Macho","Wimp The Boss","Skull crasher",1},
+      {"Raki rhodes","Raki engineer","Dark Souls III",2},
+      {"Dante","Devil Hunter","Pizza Eater",0},
+      {"Vergil","Brother killer","Fater chaser",1},
+      {"Lady","Hasbendo shooter","Lovely rain",2}
+               };
+  char ch;
+  cout<<"BOP report"<<endl;
+  cout<<"a. diplay by game     b. dispaly by title"<<endl;
+  cout<<"c. diplay by bopname  d. display by preference"<<endl;
+  cout<<"q. quit"<<endl;
+  cout<<"enter your choice:";
+  while (cin.get(ch).get(),1)
+    {
+     switch (ch)
+       {
+         case 'a':for (int x=0;x<struct_size;x++) cout<<member[x].fullname<<endl;break;
+         case 'b':for (int x=0;x<struct_size;x++) cout<<member[x].title<<endl;break;
+         case 'c':for (int x=0;x<struct_size;x++) cout<<member[x].bopname<<endl;break;
+         case 'd':for (int x=0;x<struct_size;x++)
+                    switch (member[x].preference)
+                     {
+                      case 0:cout<<member[x].fullname<<endl;break;
+                      case 1:cout<<member[x].title<<endl;break;
+                      case 2:cout<<member[x].bopname<<endl;break;
+                     };
+                   break;
+         case 'q':cout<<"Bye!"<<endl;exit(EXIT_SUCCESS);
+         default:cout<<"invalid input,please enter again:";continue;
+       }
+     cout<<"Next choice:";
+    }
+  return 0;
+}
+                      
+
