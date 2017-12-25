@@ -1,0 +1,43 @@
+#include<iostream>
+#include<fstream>
+
+struct donator_struct{
+      char name[26];
+      double donation;
+           };
+
+int main(void)
+{
+  using namespace std;
+  donator_struct* pstru;
+  int stru_size;
+  int i,x;
+
+  ifstream infile("t");
+  if (!infile.is_open())
+    {
+      cout<<"Unable to open target file"<<endl;
+      return 1;
+    }
+  (infile>>stru_size).get();
+  pstru=new donator_struct[stru_size];
+  for (i=0;i<stru_size;i++)
+    {
+     infile.getline(pstru[i].name,26);
+     (infile>>pstru[i].donation).get();
+    }
+  cout<<"Grand Patrons"<<endl;
+  for (x=i=0;i<stru_size;i++)
+    if (pstru[i].donation>10000)
+      x++,cout<<pstru[i].name<<"\t$"<<pstru[i].donation<<endl;
+  if (x==0)
+    cout<<"None"<<endl;
+  cout<<"Patrons"<<endl;  
+  for (x=i=0;i<stru_size;i++)
+    if (pstru[i].donation<10000)
+      x++,cout<<pstru[i].name<<"\t$"<<pstru[i].donation<<endl;
+  if (x==0)
+    cout<<"None"<<endl;
+  delete []pstru;
+  return 0;
+}
