@@ -1,0 +1,19 @@
+#include<iostream>
+#include<cctype>
+
+int main(void)
+{
+   using namespace std;
+   char ch;
+   while (cin.get(ch)&&ch!='@')
+    {
+     if (isalpha(ch))
+      {
+       if (islower(ch))
+         cout.put(toupper(ch));
+       else
+         cout.put(tolower(ch));
+      }
+     }
+   return 0;
+}
