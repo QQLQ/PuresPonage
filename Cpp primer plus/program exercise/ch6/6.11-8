@@ -1,0 +1,31 @@
+#include<iostream>
+#include<fstream>
+#include<cstdlib>
+
+int main(void)
+{
+   using namespace std;
+   char filename[30];
+   int char_counts=0;
+   cout<<"please enter filename:";
+   cin.getline(filename,30);
+   ifstream infile(filename);
+   if (!infile.is_open())
+   { 
+     cout<<"unable to open file \""<<filename<<"\".\nProgram terminated.\n";
+     exit(EXIT_FAILURE);
+    }
+   char ch;
+   while (infile>>ch)
+     char_counts++;
+   if (infile.eof())
+    {
+     cout<<"End of file reached."<<endl;
+     cout<<char_counts<<" characters read in total.";
+    }
+   else if(infile.fail())
+     cout<<"Dismatched date encountered."<<endl;
+   else
+     cout<<"Failed to reach end of file for unknowreason."<<endl;
+   return 0;
+}
