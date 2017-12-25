@@ -1,0 +1,32 @@
+#include<iostream>
+
+const double stage_1=5000;
+const double rate_1=0.1;
+const double stage_2=15000;
+const double rate_2=0.15;
+const double stage_3=35000;
+const double rate_3=0.2;
+
+int main(void)
+{
+   using namespace std;
+   double revenue,tax;
+   cout<<"Please enter the revenue:";
+   while (cin>>revenue)
+   {
+    if (revenue<=stage_1)
+      tax=0;
+    else if (revenue<=stage_2)
+      tax=(revenue-stage_1)*rate_1;
+    else if (revenue<=stage_3)
+      tax=(stage_2-stage_1)*rate_1+(revenue-stage_2)*rate_2;
+    else 
+      tax=(stage_2-stage_1)*rate_1+(stage_3-stage_2)*rate_2+(revenue-stage_3)*rate_3;
+    (cout<<fixed).precision(2);
+    cout.setf(ios_base::showpoint); 
+    cout<<"Your tax is "<<tax<<" tvarps."<<endl;
+    cout<<"please enter your next revenue:";
+    }
+    cout<<"Bye!"<<endl;
+    return 0;
+}
