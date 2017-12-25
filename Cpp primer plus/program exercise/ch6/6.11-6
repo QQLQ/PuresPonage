@@ -1,0 +1,39 @@
+#include<iostream>
+#include<string>
+
+struct donator_struct{
+      std::string name;
+      double donation;
+           };
+
+int main(void)
+{
+  using namespace std;
+  donator_struct* pstru;
+  int stru_size;
+  int i,x;
+  cout<<"Please enter the number of donators:";
+  (cin>>stru_size).get();
+  pstru=new donator_struct[stru_size];
+  for (i=0;i<stru_size;i++)
+    {
+     cout<<"Please enter the name for donator"<<i+1<<": ";
+     getline(cin,pstru[i].name);
+     cout<<"Please enter the donation for donator"<<i+1<<": ";
+     (cin>>pstru[i].donation).get();
+    }
+  cout<<"Grand Patrons"<<endl;
+  for (x=i=0;i<stru_size;i++)
+    if (pstru[i].donation>10000)
+      x++,cout<<pstru[i].name<<"\t$"<<pstru[i].donation<<endl;
+  if (x==0)
+    cout<<"None"<<endl;
+  cout<<"Patrons"<<endl;  
+  for (x=i=0;i<stru_size;i++)
+    if (pstru[i].donation<10000)
+      x++,cout<<pstru[i].name<<"\t$"<<pstru[i].donation<<endl;
+  if (x==0)
+    cout<<"None"<<endl;
+  delete []pstru;
+  return 0;
+}
