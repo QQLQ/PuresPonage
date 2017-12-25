@@ -1,0 +1,33 @@
+#include<iostream>
+#include<array>
+
+const int MAXSIZE=10;
+
+int main(void)
+{
+   using namespace std;
+   array<double,MAXSIZE>arr;
+   int count=0;
+   int num=0;
+   double sum=0;
+   
+   cout<<"please enter your number of donation:";
+   while (num<MAXSIZE&&cin>>arr[num])
+     {
+      num++;
+      if (!(num<MAXSIZE))
+          break;
+      cout<<"please enter next number of donation:";
+      }
+   for (double x:arr)
+      sum+=x;
+   for (double x:arr)
+      if (x>sum/num)
+         count++;
+   if (num==0)
+      cout<<"No data entered.";
+   else      
+      cout<<"The even number is "<<sum/num<<" (in total of "<<num<<" numbers)"
+          <<"and there are "<<count<<" numbers are bigger than even number."<<endl;
+   return 0;
+}
