@@ -1,0 +1,64 @@
+#include<iostream>
+
+const int MAX=5;
+
+double* fill(double* ar,double* limit);
+void show(const double* start,const double* end);
+void revalue(double r,double* start,double* end);
+ 
+int main(void)
+{
+  using namespace std;
+  double ar[MAX];
+  double* end=fill(ar,ar+MAX);
+  show(ar,end);
+  if (ar!=end)
+  {
+    cout<<"Please enter revalue factor:";
+    double factor;
+    while (!(cin>>factor))
+      {
+        cin.clear();
+        while (cin.get()!='\n');
+        cout<<"Invalid input.Reenter,please,go shujin sama~:";
+       }
+   revalue(factor,ar,end);
+   show(ar,end);
+   }
+   cout<<"Done"<<endl;
+   cin.get();
+   cin.get();
+   return 0;
+}
+
+double* fill(double* ar,double* limit)
+{
+  using namespace std;
+  for (int x=0;(ar!=limit);x++,ar++)   
+   {
+    cout<<"Enter value #"<<x+1<<":";
+    if (!(cin>>*ar))
+      break;
+   }
+   if (cin.fail())
+     {
+      cin.clear();
+      while (cin.get()!='\n');
+      }
+return ar;
+}
+     
+void show(const double* start,const double* end)
+{
+  using namespace std;
+  int x=0;
+  while (start!=end)
+    cout<<"Property #"<<++x<<":"<<*start++<<endl;
+  return;
+}
+void revalue(double r,double* start,double* end)
+{
+  while (start!=end)
+    *start=*start*r,start++;
+  return;
+} 
