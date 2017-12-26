@@ -1,0 +1,40 @@
+#include<iostream>
+const int MAXSIZE=4;
+
+double calculate(double x,double y,double (*pfun)(double x,double y));
+double add(double x,double y);
+double min(double x,double y);
+double multi(double x,double y);
+double divid(double x,double y);
+
+int main(void)
+{
+  using namespace std;
+  double (*par[MAXSIZE])(double,double)={add,min,multi,divid};
+ 
+  for (int x=0;x<MAXSIZE;x++)
+    cout<<calculate(10,5,par[x])<<endl;
+  return 0;
+}
+
+double add(double x,double y)
+{
+ return x+y;
+}
+double min(double x,double y)
+{
+ return x-y;
+}
+double multi(double x,double y)
+{
+  return x*y;
+}
+double divid(double x,double y)
+{
+  return x/y;
+}
+
+double calculate(double x,double y,double (*pfun)(double x,double y))
+{
+ return pfun(x,y);
+}
