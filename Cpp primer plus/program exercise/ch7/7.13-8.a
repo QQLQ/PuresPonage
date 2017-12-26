@@ -1,0 +1,46 @@
+#include<iostream>
+
+const int SEASONS =4;
+
+const char* SEASON[SEASONS] ={
+   "Spring",
+   "Summer",
+   "Fall",
+   "Winter"
+       };
+
+void fill(double *ar);
+void show(double *ar);
+    
+int main(void)
+{
+  double ar[SEASONS];
+  fill(ar);
+  show(ar);
+  return 0;
+}
+
+void fill(double *ar)
+{
+  using namespace std;
+  for (int x=0;x<SEASONS;x++)
+  {
+    cout<<"Enter "<<SEASON[x]<<" expense:";
+    cin>>ar[x];
+  }
+  return;
+}
+
+void show(double *ar)
+{
+  using namespace std;
+  double sum=0;
+  cout<<"EXPENSE:"<<endl;
+  for (int x=0;x<SEASONS;x++)
+    {
+     cout<<SEASON[x]<<":"<<ar[x]<<endl;
+     sum+=ar[x];
+     }
+   cout<<"Total:"<<sum<<endl;
+   return;
+}  
