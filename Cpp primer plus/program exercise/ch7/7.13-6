@@ -1,0 +1,56 @@
+#include<iostream>
+
+int Fill_array(double ar[],int maxsize);
+void Show_array(double ar[],int size);
+void Reverse_array(double ar[],int size);
+
+int main(void)
+{
+  using namespace std;
+  double* ar;
+  int maxsize,size;
+  cout<<"please enter the maxsize of the array:";
+  cin>>maxsize;
+  ar=new double[maxsize];
+  size=Fill_array(ar,maxsize);
+  Show_array(ar,size);
+  Reverse_array(ar,size);
+  Show_array(ar,size);
+  delete []ar;
+  return 0;
+}
+
+int Fill_array(double ar[],int maxsize)
+{
+  using namespace std;
+  int size;
+  cout<<"Please enter number 1:";
+  for (size=0;size<maxsize&&cin>>ar[size];size++)
+    if (size+1<maxsize)
+      cout<<"Please enter the number "<<size+2<<":";
+  return size;
+}
+
+void Show_array(double ar[],int size)
+{
+  using namespace std;
+  if (size!=0)
+  {
+   cout<<"Array as following:"<<endl;  
+     for (int x=0;x<size;x++)
+       cout<<"Number "<<x+1<<":"<<ar[x]<<endl;
+   }
+   return;
+}
+      
+void Reverse_array(double ar[],int size)
+{
+  double temp;
+  for (int x=1;x*2<(size-1);x++)
+    {
+     temp=ar[x];
+     ar[x]=ar[size-1-x];
+     ar[size-1-x]=temp;
+     }
+   return;
+}
