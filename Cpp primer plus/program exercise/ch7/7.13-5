@@ -1,0 +1,21 @@
+#include<iostream>
+
+long func(long x);
+
+int main(void)
+{
+   using namespace std;
+   long x;
+   cout<<"Please enter the number:";
+   cin>>x;
+   cout<<"The result is "<<func(x)<<endl;
+   return 0;
+}
+
+long func(long x)
+{  
+   if (x>0)
+    return x*func(x-1);
+   else 
+    return 1;
+}
