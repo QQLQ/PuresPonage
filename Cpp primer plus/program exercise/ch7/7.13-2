@@ -1,0 +1,46 @@
+#include<iostream>
+#include<array>
+const int MAXSIZE=10;
+using namespace std;
+
+int fill(array<double,MAXSIZE>*pa);
+void show(array<double,MAXSIZE>ar,int size);
+void calc(array<double,MAXSIZE>ar,int size);
+
+int main(void)
+{
+  array<double,MAXSIZE>ar;
+  int size=size=fill(&ar);
+  show(ar,size);
+  calc(ar,size);
+  return 0;
+}
+
+int fill(array<double,MAXSIZE>*pa)
+{
+    int size;
+    cout<<"Please enter your score 1:";    
+    for (size=0;size<MAXSIZE&&cin>>(*pa)[size];size++)
+      if (size+2<=MAXSIZE)
+       cout<<"Please enter score "<<size+2<<":";
+    return size;
+}
+ 
+void show(array<double,MAXSIZE>ar,int size)
+{
+   cout<<"Scores are as following:"<<endl;
+   if (size>0)
+     for (int x=0;x<size;x++)
+       if (x<MAXSIZE)
+        cout<<"Score "<<x+1<<":"<<ar[x]<<endl;
+    return;
+}
+
+void calc(array<double,MAXSIZE>ar,int size)
+{
+   double sum=0;
+   for (int x=0;x<size;x++)
+      sum+=ar[x];
+   cout<<"The even score is "<<sum/size<<endl;
+   return;
+}
