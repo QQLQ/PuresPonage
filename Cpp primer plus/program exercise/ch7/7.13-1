@@ -1,0 +1,23 @@
+#include<iostream>
+
+double harm(double x,double y);
+
+int main(void)
+{
+  using namespace std;
+  double x,y;
+  cout<<"Please enter two numbers:";
+
+  while (cin>>x>>y&&x!=0&&y!=0)
+    {
+     cout<<x<<" and "<<y<<" 's harmonic mean is "<<harm(x,y)<<endl;
+     cout<<"Please enter the next two numbers:";
+     }
+   return 0;
+}
+  
+double harm(double x,double y)
+{
+   return 2.0*x*y/(x+y);
+}
+   
