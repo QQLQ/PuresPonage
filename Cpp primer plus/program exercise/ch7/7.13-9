@@ -1,0 +1,79 @@
+#include<iostream>
+using namespace std;
+const int SLEN=30;
+struct student{
+   char fullname[SLEN];
+   char hobby[SLEN];
+   int ooplevel;
+};
+
+int getinfo(student pa[],int n);
+void display1(student st);
+void display2(student* ps);
+void display3(const student pa[],int n);
+
+int main(void)
+{
+  cout<<"Enter class size:";
+  int class_size;
+  cin>>class_size;
+  while (cin.get()!='\n');
+  student * ptr_stu=new student[class_size];
+  int entered=getinfo(ptr_stu,class_size);
+  for (int i=0;i<entered;i++)
+  {
+    display1(ptr_stu[i]);
+    display2(&ptr_stu[i]);
+  }
+  display3(ptr_stu,entered);
+  delete [] ptr_stu;
+  cout<<"Done\n";
+  return 0;
+}
+
+int getinfo(student pa[],int n)
+{
+  int size=0;
+  for (int x=0;x<n;x++)
+   {
+    cout<<"Please enter the name for student #"<<x+1<<":";
+    cin.getline(pa[x].fullname,SLEN);
+    if (pa[x].fullname[0]=='\0')
+     break;
+    cout<<"Please enter the hobby for student "<<pa[x].fullname<<":";
+    cin.getline(pa[x].hobby,SLEN);
+    cout<<"Please enter the ooplevel for student "<<pa[x].fullname<<":";
+    while (!(cin>>pa[x].ooplevel))
+     {
+      cin.clear();
+      while (cin.get()!='\n');
+      cout<<"Invalid input,please reenter:";
+     }
+    while (cin.get()!='\n');
+    size++;
+    }
+    if (size==n)
+      cout<<"The array has been filled."<<endl;
+return size;
+}
+ 
+void display1(student st)
+{
+ cout<<"Student name:"<<st.fullname<<" with hobby of "<<st.hobby<<" and ooplevel is"
+     <<st.ooplevel<<endl;
+return;
+}
+void display2(student* ps)
+{
+ cout<<"Student name:"<<ps->fullname<<" with hobby of "<<ps->hobby<<" and ooplevel is"
+     <<ps->ooplevel<<endl;
+return;
+}
+
+void display3(const student pa[],int n)
+{
+ for (int x=0;x<n;x++)
+   cout<<"Student name:"<<pa[x].fullname<<" with hobby of "<<pa[x].hobby<<" and ooplevel is"
+       <<pa[x].ooplevel<<endl;
+ return;
+ }
