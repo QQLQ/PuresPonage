@@ -1,0 +1,45 @@
+#include<iostream>
+#include<cstring>
+
+struct box{
+  char maker[40];
+  float height;
+  float width;
+  float length;
+  float volume;
+  }; 
+
+
+void set(box*pstru);
+void show(box stru);
+
+int main(void)
+{
+   using namespace std;
+   box sample;
+   set(&sample);
+   show(sample);
+   return 0;
+}
+
+void set(box*pstru)
+{
+   strcpy(pstru->maker,"GOOD");
+   pstru->height=5;
+   pstru->width=10;
+   pstru->length=100;
+   pstru->volume=pstru->height*pstru->width*pstru->length;
+   return;
+}
+
+void show(box stru)
+{
+    using namespace std;
+    cout<<"maker="<<stru.maker<<endl;
+    cout<<"height="<<stru.height<<endl;
+    cout<<"width="<<stru.width<<endl;
+    cout<<"length="<<stru.length<<endl;
+    cout<<"volume="<<stru.volume<<endl;
+    return;
+}
+    
