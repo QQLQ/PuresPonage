@@ -1,0 +1,31 @@
+#include<iostream>
+
+long double func(unsigned range_1,unsigned picks,unsigned range_2);
+
+int main(void)
+{
+  using namespace std;
+  double range_1,range_2,picks;
+  cout<<"Please enter the range for field number:";
+  cin>>range_1;
+  cout<<"Now enter the picks for field number:";
+  cin>>picks;
+  cout<<"Now enter the range for mega number:";
+  if (picks>range_1)
+    {
+    cout<<"Invalid input."<<endl;
+    return 0;
+    }
+  cin>>range_2;
+  cout<<"You got one chance in "<<func(range_1,picks,range_2)<<"."<<endl;
+  return 0;
+}
+
+long double func(unsigned range_1,unsigned picks,unsigned range_2)
+{
+  long double result=1.0;
+  for (long double x=range_1,y=picks;y>0;x--,y--)
+    result*=x/y;
+  return  result*=range_2;
+}
+    
