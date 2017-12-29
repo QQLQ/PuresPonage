@@ -1,0 +1,32 @@
+#include<iostream>
+#include<cstring>
+const int NSIZE=41;
+using namespace std;
+    
+struct candy_bar {
+   char name[NSIZE];
+   double weight;
+   int cal;
+     };
+     
+void set(candy_bar& rs,const char*name,double weight,int cal);
+void show(const candy_bar &crs);
+
+int main(void)
+{
+  candy_bar candy;
+  set(candy,"Millennuium Munch",2.85,350);
+  show(candy);
+  return 0;
+}
+
+void set(candy_bar& rs,const char*name,double weight,int cal)
+{
+  strncpy(rs.name,name,NSIZE);
+  rs.weight=weight;
+  rs.cal=cal;
+}
+void show(const candy_bar &crs)
+{
+  cout<<crs.name<<endl<<crs.weight<<endl<<crs.cal<<endl;
+}
