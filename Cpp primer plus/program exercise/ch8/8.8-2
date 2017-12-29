@@ -22,7 +22,7 @@ int main(void)
 
 void set(candy_bar& rs,const char*name,double weight,int cal)
 {
-  strncpy(rs.name,name,NSIZE);
+  strncpy(rs.name,name,NSIZE-1);
   rs.weight=weight;
   rs.cal=cal;
 }
