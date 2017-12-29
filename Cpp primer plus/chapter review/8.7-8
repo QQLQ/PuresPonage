@@ -1,0 +1,60 @@
+#include<iostream>
+
+struct box{
+  char maker[40];
+  float weight;
+  float width;
+  float length;
+  float volume;
+      };
+      
+void show(const box&crs);
+void fill(box &rs);
+
+
+template <typename T>
+T Max_1(T t1,T t2);
+
+template<> box Max_1<box>(box t1,box t2);
+
+
+int main(void)
+{
+  using namespace std;
+  box x={ "Me",100,15,10};
+  box y={ "YOU",22,7,11};
+  fill(x);
+  fill(y); 
+  cout<<(Max_1(x,y)).volume<<endl;
+  
+  
+  return 0;
+}
+
+void show(const box&crs)
+{
+  using namespace std;
+  cout<<crs.maker<<endl;
+  cout<<crs.weight<<endl;
+  cout<<crs.width<<endl;
+  cout<<crs.length<<endl;
+  cout<<crs.volume<<endl;
+  return;
+}
+
+void fill(box &rs)
+{
+ rs.volume=rs.weight*rs.width*rs.length;
+ return;
+}
+
+template <typename T>
+T Max_1(T t1,T t2)
+{
+   return t1>t2?t1:t2;
+}
+
+template<> box Max_1(box t1,box t2)
+{
+  return t1.volume>t2.volume?t1:t2;
+}
