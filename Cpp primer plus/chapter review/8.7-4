@@ -1,0 +1,37 @@
+#include<iostream>
+
+struct box{
+  char maker[40];
+  float weight;
+  float width;
+  float length;
+  float volume;
+      };
+      
+void show(box stru);
+void fill(box &rs);
+
+int main(void)
+{
+  box s={ "Me",10,2,5};
+  fill(s);
+  show(s);
+  return 0;
+}
+
+void show(box stru)
+{
+  using namespace std;
+  cout<<stru.maker<<endl;
+  cout<<stru.weight<<endl;
+  cout<<stru.width<<endl;
+  cout<<stru.length<<endl;
+  cout<<stru.volume<<endl;
+  return;
+}
+
+void fill(box &rs)
+{
+ rs.volume=rs.weight*rs.width*rs.length;
+ return;
+}
