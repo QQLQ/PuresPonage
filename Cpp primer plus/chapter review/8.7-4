@@ -8,7 +8,7 @@ struct box{
   float volume;
       };
       
-void show(box stru);
+void show(const box&crs);
 void fill(box &rs);
 
 int main(void)
@@ -19,14 +19,14 @@ int main(void)
   return 0;
 }
 
-void show(box stru)
+void show(const box&crs)
 {
   using namespace std;
-  cout<<stru.maker<<endl;
-  cout<<stru.weight<<endl;
-  cout<<stru.width<<endl;
-  cout<<stru.length<<endl;
-  cout<<stru.volume<<endl;
+  cout<<crs.maker<<endl;
+  cout<<crs.weight<<endl;
+  cout<<crs.width<<endl;
+  cout<<crs.length<<endl;
+  cout<<crs.volume<<endl;
   return;
 }
 
