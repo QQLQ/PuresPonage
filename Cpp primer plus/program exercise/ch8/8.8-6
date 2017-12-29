@@ -1,0 +1,54 @@
+#include<iostream>
+#include<cstring>
+
+template<typename T>
+T maxn(T*ar,int n);
+template<>char* maxn<char*>(char* *ar,int n);
+
+int main(void)
+{
+ using namespace std;
+ int ar_int[6]={7,8,15,1,2,9};
+ double ar_double[4]={45.2,17.6,88.9,12.1};
+ char line[5][60]={
+    {"you are mine."},
+    {"I love c++."},
+    {"Where is my cellphone?"},
+    {"Eyes on you."},
+    {"WryyyyyyyyyyyyyyyyYYYYYYYYYYYYYYYYYYYYy!"}
+       };
+
+ char* ar_cp[5];
+ 
+ for (int i=0;i<5;i++)
+    ar_cp[i]=line[i];
+    
+  cout<<maxn(ar_int,6)<<endl;
+  cout<<maxn(ar_double,4)<<endl;
+  cout<<maxn(ar_cp,5)<<endl;
+  return 0;
+}
+
+template<typename T>
+T maxn(T*ar,int n)
+{
+  T temp;
+  temp=ar[0];
+  for (int x=0;x<n;x++)
+    if (ar[x]>temp)
+       temp=ar[x];
+  return temp;
+}
+
+template<>char* maxn(char* *ar,int n)
+{
+  int i=0;
+  int temp=strlen(ar[0]);
+  for (int x=0;x<n;x++)
+    if (strlen(ar[x])>temp)
+      {
+       temp=strlen(ar[x]);
+       i=x;
+      }
+  return ar[i];
+}
