@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+
+template<typename T>
+T max5(T* ar);
+
+int main(void)
+{ 
+ int ar_int[5]={9,12,22,3,1};
+ double ar_double[5]={15.7,235.2,17.8,25,15};
+ 
+ cout<<max5(ar_int)<<endl;
+ cout<<max5(ar_double)<<endl;
+ return 0;
+}
+
+template<typename T>
+T max5(T* ar)
+{
+  T temp=ar[0];
+  for (int x=0;x<5;x++)
+    temp= ar[x]>temp?ar[x]:temp;
+ return temp;
+}
