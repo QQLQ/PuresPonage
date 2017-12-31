@@ -1,0 +1,44 @@
+#include<iostream>
+#include<cstring>
+#include<new>
+
+const int ARSIZE=3;
+
+struct chaff
+{ 
+  char dross[20];
+  int slag;
+};
+
+
+int main(void)
+{
+  using std::cout;
+  using std::cin;
+  using std::endl;
+  
+  int ari,i;
+  char buf[sizeof(chaff)*2*ARSIZE];
+  chaff** pt=new(buf)chaff* [ARSIZE];
+  for (int i=0;i<ARSIZE;i++)
+    pt[i]=new chaff[2];
+  char name[20];
+  cout<<"Enter name:";
+ for (ari=0;ari<ARSIZE;ari++)
+  for (i=0;i<2;i++) 
+   {
+    cout<<"Please enter name for ar["<<ari<<"]["<<i<<"]:"<<endl;
+    cin.getline(name,20);
+    strcpy(pt[ari][i].dross,name);
+    cout<<"Please enter slag for ar["<<ari<<"]["<<i<<"]:"<<endl;
+    (cin>>pt[ari][i].slag).get();
+    }
+ for (ari=0;ari<ARSIZE;ari++)
+  for (i=0;i<2;i++)
+   {
+    cout<<&pt[ari][i]<<endl;
+    cout<<"name:"<<pt[ari][i].dross<<" ,slag="<<pt[ari][i].slag<<endl;
+   }
+  cout<<"Done"<<endl;
+  return 0;
+}
