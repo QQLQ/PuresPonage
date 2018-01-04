@@ -1,0 +1,68 @@
+#include<iostream>
+#include<cstdlib>
+#include<cmath>
+#include"Vector.h"
+#include<fstream>
+
+int main(void)
+{
+  using namespace std;
+  using VECTOR::Vector;
+  srand(time(0));
+  double direction;
+  Vector step;
+  Vector result(0.0,0.0);
+  unsigned long steps =0;
+  double target;
+  double dstep;
+  int nums;
+  ofstream fp("t");
+  if(!fp.is_open()){
+    cout<<"The file can not be opened.\n";
+    exit(1);
+    }
+
+  cout<<"Enter the distance (q to quit):";
+  while (cin>>target){
+   cout<<"Enter step length:";
+   if (!(cin>>dstep))
+      break;
+   cout<<"Enter how times you wanna test:";
+   if (!(cin>>nums)||nums<=0)
+      break;
+   int* reco_p=new int[nums];
+   for (int i=0;i<nums;i++){
+   fp<<"Target distance:"<<target<<" ,Step Size:"<<dstep<<endl;
+   while (result.magval()<target)
+   {
+     fp<<steps<<":"<<result<<endl;
+     direction=rand()%360;
+     step.reset(dstep,direction,Vector::POL);
+     result=result+step;
+     steps++;
+   }
+   reco_p[i]=steps;
+   result.reset(0.0,0.0);
+   steps=0;
+   }
+   int max,min,total;
+   total=0;
+   max=min=reco_p[0];
+   for (int i=0,x;i<nums;i++)
+     {
+      x=reco_p[i];
+      if (max<x) max=x;
+      if (min>x) min=x;
+      total+=x;
+      }     
+   cout<<"After "<<nums<<" tests, the max steps are "<<max
+       <<",the min steps are "<<min<<".And average steps are "<<double(total)/nums<<".\n";
+   delete [] reco_p;
+   cout<<"Enter the target distance(q to quit):";
+   }
+   fp.close();
+   cout<<"Bye!\n";
+   cin.clear();
+   while (cin.get()!='\n');
+   return 0;
+}
