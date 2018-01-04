@@ -26,10 +26,10 @@ void Vector::set_y(){
   y=mag*sin(ang);
 }
 void Vector::polar_mode(){
-mode=RECT;
+mode=POL;
 }
 void Vector::rect_mode(){
-mode=POL;
+mode=RECT;
 }
 Vector::Vector(){
 x=y=ang=mag=0.0;
