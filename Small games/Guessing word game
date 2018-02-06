@@ -1,0 +1,97 @@
+#include<iostream>
+#include<string>
+const int guesstimes=6;
+std::string word="apiary";
+
+void sword(const std::string& tar, const std::string& str)
+{
+  using std::cout;
+  using std::endl;
+  using std::string;
+  int n=0;
+  int i=0;
+  int word_length=tar.size();
+  int ar[word_length];
+  while ((n=tar.find_first_of(str,n))!=std::string::npos)  
+  {
+   ar[i]=n;
+   n++;
+   i++;
+  }
+  int f=0;
+  for (int k=0;k<word_length;k++)
+  {
+   if (k==ar[f])
+   {
+    f++;
+    cout<<tar[k];
+   }
+   else
+    cout<<'-';                 
+  }
+   
+   cout<<endl;
+}
+
+int main(void)
+{
+ using std::cout;
+ using std::cin;
+ using std::endl;
+ using std::string;
+ 
+ cout<<"Now lets guess the word.";
+ cout<<"It has "<<word.size()<<" characters,and you got "<<guesstimes<<"wrong guesses."<<endl;
+ char ch;
+ int count=0;
+ string guessright="";
+ string guesswrong="";
+ 
+ while (count<guesstimes&&(word.find_first_not_of(guessright)!=string::npos) )
+ {
+ 
+  cout<<"Your word:";
+  sword(word,guessright);
+  if (count>0)
+  {
+   cout<<"Bad choice:"<<guesswrong<<endl;
+   cout<<(guesstimes-count)<<" bad choices left."<<endl;
+  }
+
+  cout<<"Guess a letter:";
+  cin>>ch;
+  if (guesswrong.find(ch)!=string::npos||guessright.find(ch)!=string::npos)
+  {
+   cout<<"you already guessed it."<<endl;
+  }
+  else if ( (word.find(ch))!=string::npos)
+   {
+   cout<<"Good guess!"<<endl;
+   if (guessright.find(ch)==string::npos)
+    guessright+=ch;
+   }
+  else
+   {
+   cout<<"Oh,bad guess."<<endl;
+   if (guesswrong.find(ch)==string::npos)
+    guesswrong+=ch;
+   count++;
+   }
+ 
+  }
+  if (count<guesstimes)
+  {
+   cout<<"Conratulations!Good game."<<endl;
+  }
+  else
+  {
+   cout<<"Sad,but no worries, you are still good!"<<endl;
+  }
+  
+/*
+ cout<<"Gr:"<<guessright<<endl;
+ cout<<"Gw:"<<guesswrong<<endl;
+*/  
+
+return 0;
+}
