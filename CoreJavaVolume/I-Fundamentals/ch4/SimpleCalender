@@ -1,0 +1,30 @@
+import java.time.*;
+public class SimpleCalender
+{
+ public static void main(String[]args)
+ {
+  LocalDate date=LocalDate.now();
+  int today=date.getDayOfMonth();
+  int month=date.getMonthValue();
+  LocalDate start=date.minusDays(today-1);
+  DayOfWeek weekday=start.getDayOfWeek();
+  int value=weekday.getValue();
+  
+   System.out.println("Mon Tue Wed Thu Fri Sat Sun");
+   for(int i=1;i<value;i++)
+    System.out.print("    ");
+  while(start.getMonthValue()==month)
+  {
+   System.out.printf("%3d",start.getDayOfMonth());
+   if(today==start.getDayOfMonth())
+     System.out.print("*");
+   else
+     System.out.print(" ");
+   start=start.plusDays(1);
+   if (start.getDayOfWeek().getValue()==1)
+      System.out.println(); 
+   }
+   if (start.getDayOfWeek().getValue()!=1)
+      System.out.println();
+  }
+}
